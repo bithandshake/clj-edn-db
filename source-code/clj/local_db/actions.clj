@@ -7,6 +7,7 @@
               [local-db.check   :as check]
               [local-db.engine  :as engine]
               [local-db.helpers :as helpers]
+              [local-db.reader  :as reader]
               [time.api         :as time]))
 
 
@@ -38,7 +39,7 @@
   ;
   ; @return (nil)
   [collection-name document]
-  (let [collection (get-collection collection-name)
+  (let [collection (reader/get-collection collection-name)
         document   (time/unparse-date-time document)]
        (set-collection! collection-name (engine/add-document collection document))))
 
@@ -48,7 +49,7 @@
   ;
   ; @return (nil)
   [collection-name document-ids]
-  (let [collection (get-collection collection-name)]
+  (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (engine/remove-documents collection document-ids))))
 
 (defn remove-document!
@@ -57,7 +58,7 @@
   ;
   ; @return (nil)
   [collection-name document-id]
-  (let [collection (get-collection collection-name)]
+  (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (engine/remove-document collection document-id))))
 
 (defn set-document!
@@ -67,7 +68,7 @@
   ;
   ; @return (nil)
   [collection-name document-id document]
-  (let [collection (get-collection collection-name)
+  (let [collection (reader/get-collection collection-name)
         document   (time/unparse-date-time document)]
        (set-collection! collection-name (-> collection (engine/remove-document document-id)
                                                        (engine/add-document    document)))))
@@ -91,7 +92,7 @@
   ; Az 1.0.3 verzióig az apply-document! függvény az engine/apply-document függvény
   ; alkalmazásával volt megvalósítva, amely nem tette lehetővé a params listában
   ; átadott anoním függvényekben lévő dátum objektumok string típussá alakítását.
-  (let [collection       (get-collection      collection-name)
+  (let [collection       (reader/get-collection      collection-name)
         document         (engine/get-document collection document-id)
         params           (cons document params)
         updated-document (apply f params)
