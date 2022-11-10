@@ -1,7 +1,4 @@
 
-;; -- Namespace ---------------------------------------------------------------
-;; ----------------------------------------------------------------------------
-
 (ns local-db.actions
     (:require [io.api           :as io]
               [local-db.check   :as check]
@@ -9,8 +6,6 @@
               [local-db.helpers :as helpers]
               [local-db.reader  :as reader]
               [time.api         :as time]))
-
-
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -27,8 +22,6 @@
   (if (check/collection-writable? collection-name)
       (let [filepath (helpers/collection-name->filepath collection-name)]
            (io/write-edn-file! filepath collection {:abc? true}))))
-
-
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
