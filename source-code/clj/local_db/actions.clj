@@ -17,11 +17,11 @@
   ; @usage
   ;  (set-collection! "my_collection" [{...} {...} {...}])
   ;
-  ; @return (nil)
+  ; @return (boolean)
   [collection-name collection]
-  (if (check/collection-writable? collection-name)
-      (let [filepath (helpers/collection-name->filepath collection-name)]
-           (io/write-edn-file! filepath collection {:abc? true}))))
+  (boolean (if (check/collection-writable? collection-name)
+               (let [filepath (helpers/collection-name->filepath collection-name)]
+                    (io/write-edn-file! filepath collection {:abc? true})))))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
