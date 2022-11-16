@@ -13,7 +13,7 @@
   ; @param (maps in vector) collection
   ;
   ; @usage
-  ;  (collection->namespace [{...} {...} {...}])
+  ; (collection->namespace [{...} {...} {...}])
   ;
   ; @return (keyword)
   [collection]
@@ -27,24 +27,24 @@
   ; @param (map) document
   ;
   ; @example
-  ;  (document<-document-id {:bar "baz" :id "my-document"})
-  ;  =>
-  ;  {:bar "baz" :id "my-document"}
+  ; (document<-document-id {:bar "baz" :id "my-document"})
+  ; =>
+  ; {:bar "baz" :id "my-document"}
   ;
   ; @example
-  ;  (document<-document-id {:foo/bar "baz" :foo/id "my-document"})
-  ;  =>
-  ;  {:foo/bar "baz" :foo/id "my-document"}
+  ; (document<-document-id {:foo/bar "baz" :foo/id "my-document"})
+  ; =>
+  ; {:foo/bar "baz" :foo/id "my-document"}
   ;
   ; @example
-  ;  (document<-document-id {:bar "baz"})
-  ;  =>
-  ;  {:bar "baz" :id "0ce14671-e916-43ab-b057-0939329d4c1b"}
+  ; (document<-document-id {:bar "baz"})
+  ; =>
+  ; {:bar "baz" :id "0ce14671-e916-43ab-b057-0939329d4c1b"}
   ;
   ; @example
-  ;  (document<-document-id {:foo/bar "baz"})
-  ;  =>
-  ;  {:foo/bar "baz" :foo/id "0ce14671-e916-43ab-b057-0939329d4c1b"}
+  ; (document<-document-id {:foo/bar "baz"})
+  ; =>
+  ; {:foo/bar "baz" :foo/id "0ce14671-e916-43ab-b057-0939329d4c1b"}
   ;
   ; @return (map)
   [document]
@@ -65,22 +65,22 @@
   ; @param (maps in vector) collection
   ; @param (integer) max-count
   ; @param (integer)(opt) skip
-  ;  Default: 0
+  ; Default: 0
   ;
   ; @example
-  ;  (trim-collection [{:id "1"} {:id "2"} {:id "3"} {:id "4"} {:id "5"}] 2)
-  ;  =>
-  ;  [{:id "1"} {:id "2"}]
+  ; (trim-collection [{:id "1"} {:id "2"} {:id "3"} {:id "4"} {:id "5"}] 2)
+  ; =>
+  ; [{:id "1"} {:id "2"}]
   ;
   ; @example
-  ;  (trim-collection [{:id "1"} {:id "2"} {:id "3"} {:id "4"} {:id "5"}] 2 1)
-  ;  =>
-  ;  [{:id "2"} {:id "3"} {:id "4"}]
+  ; (trim-collection [{:id "1"} {:id "2"} {:id "3"} {:id "4"} {:id "5"}] 2 1)
+  ; =>
+  ; [{:id "2"} {:id "3"} {:id "4"}]
   ;
   ; @example
-  ;  (trim-collection [{:id "1"} {:id "2"} {:id "3"} {:id "4"} {:id "5"}] 2 4)
-  ;  =>
-  ;  [{:id "5"}]
+  ; (trim-collection [{:id "1"} {:id "2"} {:id "3"} {:id "4"} {:id "5"}] 2 4)
+  ; =>
+  ; [{:id "5"}]
   ;
   ; @return (maps in vector)
   ([collection max-count]
@@ -94,7 +94,7 @@
   ; @param (function) filter-f
   ;
   ; @usage
-  ;  (filter-documents [{...} {...} {...}] #(= :value (:key %1)))
+  ; (filter-documents [{...} {...} {...}] #(= :value (:key %1)))
   ;
   ; @return (maps in vector)
   [collection filter-f]
@@ -111,7 +111,7 @@
   ; @param (function) filter-f
   ;
   ; @usage
-  ;  (filter-document [{...} {...} {...}] #(= :value (:key %1)))
+  ; (filter-document [{...} {...} {...}] #(= :value (:key %1)))
   ;
   ; @return (map)
   [collection filter-f]
@@ -124,9 +124,9 @@
   ; @param (map) pattern
   ;
   ; @example
-  ;  (match-documents [{:foo "bar"} {...} {:foo "bar"}] {:foo "bar"})
-  ;  =>
-  ;  [{:foo "bar"} {:foo "bar"}]
+  ; (match-documents [{:foo "bar"} {...} {:foo "bar"}] {:foo "bar"})
+  ; =>
+  ; [{:foo "bar"} {:foo "bar"}]
   ;
   ; @return (maps in vector)
   [collection pattern]
@@ -145,9 +145,9 @@
   ; @param (map) pattern
   ;
   ; @example
-  ;  (match-document [{:foo "bar"} {...} {:foo "bar"}] {:foo "bar"})
-  ;  =>
-  ;  {:foo "bar"}
+  ; (match-document [{:foo "bar"} {...} {:foo "bar"}] {:foo "bar"})
+  ; =>
+  ; {:foo "bar"}
   ;
   ; @return (map)
   [collection pattern]
@@ -161,9 +161,9 @@
   ; @param (*) item-value
   ;
   ; @example
-  ;  (get-documents-kv [{:foo "bar"} {...} {:foo "bar"}] :foo "bar")
-  ;  =>
-  ;  [{:foo "bar"} {:foo "bar"}]
+  ; (get-documents-kv [{:foo "bar"} {...} {:foo "bar"}] :foo "bar")
+  ; =>
+  ; [{:foo "bar"} {:foo "bar"}]
   ;
   ; @return (maps in vector)
   [collection item-key item-value]
@@ -183,9 +183,9 @@
   ; @param (*) item-value
   ;
   ; @example
-  ;  (get-document-kv [{...} {...} {:foo "bar"}] :foo "bar")
-  ;  =>
-  ;  {:foo "bar"}
+  ; (get-document-kv [{...} {...} {:foo "bar"}] :foo "bar")
+  ; =>
+  ; {:foo "bar"}
   ;
   ; @return (map)
   [collection item-key item-value]
@@ -198,7 +198,7 @@
   ; @param (string) document-id
   ;
   ; @usage
-  ;  (get-document [{...} {...} {...}] "my-document")
+  ; (get-document [{...} {...} {...}] "my-document")
   ;
   ; @return (map)
   [collection document-id]
@@ -213,10 +213,10 @@
   ; @param (keyword) item-key
   ;
   ; @example
-  ;  (get-document-item [{:id "my-document" :label "My document"} {...} {...}]
-  ;                     "my-document" :label)
-  ;  =>
-  ;  "My document"
+  ; (get-document-item [{:id "my-document" :label "My document"} {...} {...}]
+  ;                    "my-document" :label)
+  ; =>
+  ; "My document"
   ;
   ; @return (*)
   [collection document-id item-key]
@@ -242,19 +242,19 @@
   ; @param (keyword) document
   ;
   ; @example
-  ;  (add-document [{:foo "bar"}] {:baz "boo"})
-  ;  =>
-  ;  [{:foo "bar"} {:baz "boo"}]
+  ; (add-document [{:foo "bar"}] {:baz "boo"})
+  ; =>
+  ; [{:foo "bar"} {:baz "boo"}]
   ;
   ; @example
-  ;  (add-document [{:foo "bar"}] {:bam/baz "boo"})
-  ;  =>
-  ;  [{:foo "bar"} {:baz "boo"}]
+  ; (add-document [{:foo "bar"}] {:bam/baz "boo"})
+  ; =>
+  ; [{:foo "bar"} {:baz "boo"}]
   ;
   ; @example
-  ;  (add-document [{:bam/foo "bar"}] {:baz "boo"})
-  ;  =>
-  ;  [{:bam/foo "bar"} {:bam/baz "boo"}]
+  ; (add-document [{:bam/foo "bar"}] {:baz "boo"})
+  ; =>
+  ; [{:bam/foo "bar"} {:bam/baz "boo"}]
   ;
   ; @return (maps in vector)
   [collection document]
@@ -270,9 +270,9 @@
   ; @param (string) document-id
   ;
   ; @example
-  ;  (remove-document [{:id "1"} {:id "2"}] "2")
-  ;  =>
-  ;  [{:id "1"}]
+  ; (remove-document [{:id "1"} {:id "2"}] "2")
+  ; =>
+  ; [{:id "1"}]
   ;
   ; @return (maps in vector)
   [collection document-id]
@@ -287,9 +287,9 @@
   ; @param (strings in vector) document-ids
   ;
   ; @example
-  ;  (remove-documents [{:id "1"} {:id "2"} {:id "3"}] ["1" "3"])
-  ;  =>
-  ;  [{:id "2"}]
+  ; (remove-documents [{:id "1"} {:id "2"} {:id "3"}] ["1" "3"])
+  ; =>
+  ; [{:id "2"}]
   ;
   ; @return (maps in vector)
   [collection document-ids]
@@ -306,12 +306,12 @@
   ; @param (list of *)(opt) params
   ;
   ; @usage
-  ;  (apply-document [{:id "my-document" :label "My document"}]
-  ;                  "my-document" assoc :foo "bar")
+  ; (apply-document [{:id "my-document" :label "My document"}]
+  ;                 "my-document" assoc :foo "bar")
   ;
   ; @usage
-  ;  (apply-document [{:id "my-document" :label "My document"}]
-  ;                  "my-document" (fn [document] (assoc document :foo "bar")))
+  ; (apply-document [{:id "my-document" :label "My document"}]
+  ;                 "my-document" (fn [document] (assoc document :foo "bar")))
   ;
   ; @return (maps in vector)
   [collection document-id f & params]

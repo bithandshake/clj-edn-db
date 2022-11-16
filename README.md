@@ -1,5 +1,11 @@
 
 # local-db-api
 
-# Documentation book is releasing soon ...
-  2023.01.01.
+### Overview
+...
+
+### Current version
+The <strong>local-db-api</strong> is releasing soon on Clojars!
+
+### Documentation
+The <strong>local-db-api</strong> documentation is [available here](documentation/COVER.md).

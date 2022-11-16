@@ -12,9 +12,9 @@
   ; @param (string) collection-name
   ;
   ; @example
-  ;  (get-collection "my_collection")
-  ;  =>
-  ;  [{...} {...} {...}]
+  ; (get-collection "my_collection")
+  ; =>
+  ; [{...} {...} {...}]
   ;
   ; @return (vector)
   [collection-name]
@@ -29,7 +29,7 @@
   ; @param (function) filter-f
   ;
   ; @usage
-  ;  (filter-documents "my_collection" #(= :value (:key %1)))
+  ; (filter-documents "my_collection" #(= :value (:key %1)))
   ;
   ; @return (maps in vector)
   [collection-name filter-f]
@@ -41,7 +41,7 @@
   ; @param (function) filter-f
   ;
   ; @usage
-  ;  (filter-document "my_collection" #(= :value (:key %1)))
+  ; (filter-document "my_collection" #(= :value (:key %1)))
   ;
   ; @return (map)
   [collection-name filter-f]
@@ -53,9 +53,9 @@
   ; @param (map) pattern
   ;
   ; @example
-  ;  (match-documents "my_collection" {:foo "bar"})
-  ;  =>
-  ;  [{:foo "bar" :baz "boo"}]
+  ; (match-documents "my_collection" {:foo "bar"})
+  ; =>
+  ; [{:foo "bar" :baz "boo"}]
   ;
   ; @return (maps in vector)
   [collection-name pattern]
@@ -67,9 +67,9 @@
   ; @param (keyword) pattern
   ;
   ; @example
-  ;  (match-document "my_collection" {:foo "bar"})
-  ;  =>
-  ;  {:foo "bar" :baz "boo"}
+  ; (match-document "my_collection" {:foo "bar"})
+  ; =>
+  ; {:foo "bar" :baz "boo"}
   ;
   ; @return (map)
   [collection-name pattern]
@@ -120,9 +120,9 @@
   ; @param (keyword) item-key
   ;
   ; @return (*)
-  ([collection-name document-id item-key]
-   (let [collection (get-collection collection-name)]
-        (engine/get-document-item collection document-id item-key))))
+  [collection-name document-id item-key]
+  (let [collection (get-collection collection-name)]
+       (engine/get-document-item collection document-id item-key)))
 
 (defn document-exists?
   ; @param (string) collection-name

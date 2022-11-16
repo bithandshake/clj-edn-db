@@ -15,7 +15,7 @@
   ; @param (maps in vector) collection
   ;
   ; @usage
-  ;  (set-collection! "my_collection" [{...} {...} {...}])
+  ; (set-collection! "my_collection" [{...} {...} {...}])
   ;
   ; @return (boolean)
   [collection-name collection]
@@ -73,11 +73,11 @@
   ; @param (list of *)(opt) params
   ;
   ; @usage
-  ;  (apply-document! "my_collection" "my-document" assoc :foo "bar")
+  ; (apply-document! "my_collection" "my-document" assoc :foo "bar")
   ;
   ; @usage
-  ;  (apply-document! "my_collection" "my-document"
-  ;                   (fn [document] (assoc document :foo "bar")))
+  ; (apply-document! "my_collection" "my-document"
+  ;                  (fn [document] (assoc document :foo "bar")))
   ;
   ; @return (nil)
   [collection-name document-id f & params]
