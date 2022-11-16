@@ -10,6 +10,9 @@
 (defn max-filesize-reached?
   ; @param (string) collection-name
   ;
+  ; @usage
+  ; (max-filesize-reached? "my_collection")
+  ;
   ; @return (boolean)
   [collection-name]
   (let [filepath (helpers/collection-name->filepath collection-name)]
@@ -17,6 +20,9 @@
 
 (defn collection-exists?
   ; @param (string) collection-name
+  ;
+  ; @usage
+  ; (collection-exists? "my_collection")
   ;
   ; @return (boolean)
   [collection-name]
@@ -26,6 +32,9 @@
 (defn collection-writable?
   ; @param (string) collection-name
   ;
+  ; @usage
+  ; (collection-writable? "my_collection")
+  ;
   ; @return (boolean)
   [collection-name]
   (and (-> collection-name collection-exists?)
@@ -33,6 +42,9 @@
 
 (defn collection-readable?
   ; @param (string) collection-name
+  ;
+  ; @usage
+  ; (collection-readable? "my_collection")
   ;
   ; @return (boolean)
   [collection-name]

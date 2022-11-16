@@ -81,6 +81,11 @@
   ; @param (keyword) item-key
   ; @param (*) item-value
   ;
+  ; @example
+  ; (get-documents-kv "my_collection" :foo "bar")
+  ; =>
+  ; [{:foo "bar"} {:foo "bar"}]
+  ;
   ; @return (maps in vector)
   [collection-name item-key item-value]
   (let [collection (get-collection collection-name)]
@@ -91,6 +96,11 @@
   ; @param (keyword) item-key
   ; @param (*) item-value
   ;
+  ; @example
+  ; (get-document-kv "my_collection" :foo "bar")
+  ; =>
+  ; {:foo "bar"}
+  ;
   ; @return (map)
   [collection-name item-key item-value]
   (let [collection (get-collection collection-name)]
@@ -100,6 +110,9 @@
   ; @param (string) collection-name
   ; @param (strings in vector) document-ids
   ;
+  ; @usage
+  ; (get-documents "my_collection" ["my-document" "your-document"])
+  ;
   ; @return (maps in vector)
   [collection-name document-ids]
   (let [collection (get-collection collection-name)]
@@ -108,6 +121,9 @@
 (defn get-document
   ; @param (string) collection-name
   ; @param (string) document-id
+  ;
+  ; @usage
+  ; (get-document "my_collection" "my-document")
   ;
   ; @return (map)
   [collection-name document-id]
@@ -119,6 +135,9 @@
   ; @param (string) document-id
   ; @param (keyword) item-key
   ;
+  ; @usage
+  ; (get-document-item "my_collection" "my-document" :my-item)
+  ;
   ; @return (*)
   [collection-name document-id item-key]
   (let [collection (get-collection collection-name)]
@@ -127,6 +146,9 @@
 (defn document-exists?
   ; @param (string) collection-name
   ; @param (string) document-id
+  ;
+  ; @usage
+  ; (document-exists? "my_collection" "my-document")
   ;
   ; @return (boolean)
   [collection-name document-id]

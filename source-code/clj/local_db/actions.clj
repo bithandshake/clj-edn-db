@@ -30,6 +30,9 @@
   ; @param (string) collection-name
   ; @param (map) document
   ;
+  ; @usage
+  ; (add-document! "my_collection" {...})
+  ;
   ; @return (nil)
   [collection-name document]
   (let [collection (reader/get-collection collection-name)
@@ -40,6 +43,9 @@
   ; @param (string) collection-name
   ; @param (strings in vector) document-ids
   ;
+  ; @usage
+  ; (remove-documents! "my_collection" ["my-document"])
+  ;
   ; @return (nil)
   [collection-name document-ids]
   (let [collection (reader/get-collection collection-name)]
@@ -48,6 +54,9 @@
 (defn remove-document!
   ; @param (string) collection-name
   ; @param (string) document-id
+  ;
+  ; @usage
+  ; (remove-document! "my_collection" "my-document")
   ;
   ; @return (nil)
   [collection-name document-id]
@@ -58,6 +67,9 @@
   ; @param (string) collection-name
   ; @param (string) document-id
   ; @param (map) document
+  ;
+  ; @usage
+  ; (set-document! "my_collection" "my-document" {...})
   ;
   ; @return (nil)
   [collection-name document-id document]

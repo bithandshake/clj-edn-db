@@ -14,6 +14,11 @@
 ```
 
 ```
+@usage
+(add-document! "my_collection" {...})
+```
+
+```
 @return (nil)
 ```
 
@@ -104,6 +109,11 @@
 ```
 @param (string) collection-name
 @param (string) document-id
+```
+
+```
+@usage
+(document-exists? "my_collection" "my-document")
 ```
 
 ```
@@ -271,6 +281,11 @@
 ```
 
 ```
+@usage
+(get-document "my_collection" "my-document")
+```
+
+```
 @return (map)
 ```
 
@@ -306,6 +321,11 @@
 @param (string) collection-name
 @param (string) document-id
 @param (keyword) item-key
+```
+
+```
+@usage
+(get-document-item "my_collection" "my-document" :my-item)
 ```
 
 ```
@@ -347,6 +367,13 @@
 ```
 
 ```
+@example
+(get-document-kv "my_collection" :foo "bar")
+=>
+{:foo "bar"}
+```
+
+```
 @return (map)
 ```
 
@@ -381,6 +408,11 @@
 ```
 @param (string) collection-name
 @param (strings in vector) document-ids
+```
+
+```
+@usage
+(get-documents "my_collection" ["my-document" "your-document"])
 ```
 
 ```
@@ -419,6 +451,13 @@
 @param (string) collection-name
 @param (keyword) item-key
 @param (*) item-value
+```
+
+```
+@example
+(get-documents-kv "my_collection" :foo "bar")
+=>
+[{:foo "bar"} {:foo "bar"}]
 ```
 
 ```
@@ -547,6 +586,11 @@
 ```
 
 ```
+@usage
+(remove-document! "my_collection" "my-document")
+```
+
+```
 @return (nil)
 ```
 
@@ -581,6 +625,11 @@
 ```
 @param (string) collection-name
 @param (strings in vector) document-ids
+```
+
+```
+@usage
+(remove-documents! "my_collection" ["my-document"])
 ```
 
 ```
@@ -662,6 +711,11 @@
 @param (string) collection-name
 @param (string) document-id
 @param (map) document
+```
+
+```
+@usage
+(set-document! "my_collection" "my-document" {...})
 ```
 
 ```

@@ -214,7 +214,8 @@
   ;
   ; @example
   ; (get-document-item [{:id "my-document" :label "My document"} {...} {...}]
-  ;                    "my-document" :label)
+  ;                    "my-document"
+  ;                    :label)
   ; =>
   ; "My document"
   ;
@@ -226,6 +227,9 @@
 (defn get-documents
   ; @param (maps in vector) collection
   ; @param (strings in vector) document-ids
+  ;
+  ; @usage
+  ; (get-documents [{...} {...}] ["my-document" ...])
   ;
   ; @return (maps in vector)
   [collection document-ids]
@@ -324,6 +328,9 @@
 (defn document-exists?
   ; @param (maps in vector) collection
   ; @param (string) document-id
+  ;
+  ; @usage
+  ; (document-exists? [{...} {...}] "my-document")
   ;
   ; @return (boolean)
   [collection document-id]
