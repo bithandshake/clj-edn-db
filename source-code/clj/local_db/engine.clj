@@ -1,10 +1,10 @@
 
 (ns local-db.engine
-    (:require [candy.api          :refer [return]]
-              [mid-fruits.keyword :as keyword]
-              [mid-fruits.map     :as map]
-              [mid-fruits.random  :as random]
-              [mid-fruits.vector  :as vector]))
+    (:require [candy.api   :refer [return]]
+              [keyword.api :as keyword]
+              [map.api     :as map]
+              [random.api  :as random]
+              [vector.api  :as vector]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 
 (ns local-db.helpers
-    (:require [local-db.config   :as config]
-              [mid-fruits.string :as string]))
+    (:require [local-db.config :as config]
+              [string.api      :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -14,7 +14,7 @@
   ;
   ; @return (boolean)
   [collection-name]
-  (string/nonempty? collection-name))
+  (string/nonblank? collection-name))
 
 (defn collection-name->filepath
   ; @param (string) collection-name
