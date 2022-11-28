@@ -4,6 +4,7 @@
               [keyword.api :as keyword]
               [map.api     :as map]
               [random.api  :as random]
+              [time.api    :as time]
               [vector.api  :as vector]))
 
 ;; ----------------------------------------------------------------------------
@@ -262,12 +263,15 @@
   ;
   ; @return (maps in vector)
   [collection document]
-  (let [document (document<-document-id document)]
-       (if-let [namespace (collection->namespace collection)]
-               (let [document (map/add-namespace document namespace)]
-                    (vector/conj-item collection document))
-               (let [document (map/remove-namespace document)]
-                    (vector/conj-item collection document)))))
+  (let [document (document<-document-id document)
+        document (time/unparse-date-time document)]
+       (if (empty? collection)
+           (vector/conj-item collection document)
+           (if-let [namespace (collection->namespace collection)]
+                   (let [document (map/add-namespace document namespace)]
+                        (vector/conj-item collection document))
+                   (let [document (map/remove-namespace document)]
+                        (vector/conj-item collection document))))))
 
 (defn remove-document
   ; @param (maps in vector) collection
@@ -318,10 +322,11 @@
   ;                 "my-document" (fn [document] (assoc document :foo "bar")))
   ;
   ; @return (maps in vector)
-  [collection document-id f & params]
+  [collection document-id f & [params]]
   (let [document         (get-document collection document-id)
         params           (cons document params)
-        updated-document (apply f params)]
+        updated-document (apply f params)
+        updated-document (time/unparse-date-time updated-document)]
        (-> collection (remove-document document-id)
                       (add-document    updated-document))))
 

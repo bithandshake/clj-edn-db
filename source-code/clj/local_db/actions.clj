@@ -1,11 +1,11 @@
 
 (ns local-db.actions
-    (:require [io.api           :as io]
+    (:require [candy.api        :refer [return]]
+              [io.api           :as io]
               [local-db.check   :as check]
               [local-db.engine  :as engine]
               [local-db.helpers :as helpers]
-              [local-db.reader  :as reader]
-              [time.api         :as time]))
+              [local-db.reader  :as reader]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -21,7 +21,8 @@
   [collection-name collection]
   (boolean (if (check/collection-writable? collection-name)
                (let [filepath (helpers/collection-name->filepath collection-name)]
-                    (io/write-edn-file! filepath collection {:abc? true})))))
+                    (io/write-edn-file! filepath collection {:abc? true :create? true}))
+               (println "local-db.actions:" collection-name "collection is not writable!"))))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -33,11 +34,16 @@
   ; @usage
   ; (add-document! "my_collection" {...})
   ;
-  ; @return (nil)
+  ; @example
+  ; (add-document! "my_collection" {...})
+  ; =>
+  ; {...}
+  ;
+  ; @return (map)
   [collection-name document]
-  (let [collection (reader/get-collection collection-name)
-        document   (time/unparse-date-time document)]
-       (set-collection! collection-name (engine/add-document collection document))))
+  (let [collection (reader/get-collection collection-name)]
+       (set-collection! collection-name (engine/add-document collection document))
+       (return document)))
 
 (defn remove-documents!
   ; @param (string) collection-name
@@ -46,10 +52,16 @@
   ; @usage
   ; (remove-documents! "my_collection" ["my-document"])
   ;
-  ; @return (nil)
+  ; @example
+  ; (remove-documents! "my_collection" ["my-document"])
+  ; =>
+  ; ["my-document"]
+  ;
+  ; @return (strings in vector)
   [collection-name document-ids]
   (let [collection (reader/get-collection collection-name)]
-       (set-collection! collection-name (engine/remove-documents collection document-ids))))
+       (set-collection! collection-name (engine/remove-documents collection document-ids))
+       (return document-ids)))
 
 (defn remove-document!
   ; @param (string) collection-name
@@ -58,10 +70,16 @@
   ; @usage
   ; (remove-document! "my_collection" "my-document")
   ;
-  ; @return (nil)
+  ; @example
+  ; (remove-document! "my_collection" "my-document")
+  ; =>
+  ; "my-document"
+  ;
+  ; @return (string)
   [collection-name document-id]
   (let [collection (reader/get-collection collection-name)]
-       (set-collection! collection-name (engine/remove-document collection document-id))))
+       (set-collection! collection-name (engine/remove-document collection document-id))
+       (return document-id)))
 
 (defn set-document!
   ; @param (string) collection-name
@@ -71,12 +89,17 @@
   ; @usage
   ; (set-document! "my_collection" "my-document" {...})
   ;
-  ; @return (nil)
+  ; @example
+  ; (set-document! "my_collection" "my-document" {...})
+  ; =>
+  ; "my-document"
+  ;
+  ; @return (string)
   [collection-name document-id document]
-  (let [collection (reader/get-collection collection-name)
-        document   (time/unparse-date-time document)]
+  (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (-> collection (engine/remove-document document-id)
-                                                       (engine/add-document    document)))))
+                                                       (engine/add-document    document)))
+       (return document-id)))
 
 (defn apply-document!
   ; @param (string) collection-name
@@ -91,16 +114,13 @@
   ; (apply-document! "my_collection" "my-document"
   ;                  (fn [document] (assoc document :foo "bar")))
   ;
-  ; @return (nil)
+  ; @example
+  ; (apply-document! "my_collection" "my-document" (fn [%] %))
+  ; =>
+  ; "my-document"
+  ;
+  ; @return (string)
   [collection-name document-id f & params]
-  ; XXX#8075
-  ; Az 1.0.3 verzióig az apply-document! függvény az engine/apply-document függvény
-  ; alkalmazásával volt megvalósítva, amely nem tette lehetővé a params listában
-  ; átadott anoním függvényekben lévő dátum objektumok string típussá alakítását.
-  (let [collection       (reader/get-collection      collection-name)
-        document         (engine/get-document collection document-id)
-        params           (cons document params)
-        updated-document (apply f params)
-        updated-document (time/unparse-date-time updated-document)]
-       (set-collection! collection-name (-> collection (engine/remove-document document-id)
-                                                       (engine/add-document    updated-document)))))
+  (let [collection (reader/get-collection collection-name)]
+       (set-collection! collection-name (engine/apply-document collection document-id f params))
+       (return document-id)))

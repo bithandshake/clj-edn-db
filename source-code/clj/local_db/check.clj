@@ -37,8 +37,8 @@
   ;
   ; @return (boolean)
   [collection-name]
-  (and (-> collection-name collection-exists?)
-       (-> collection-name max-filesize-reached? not)))
+  (let [max-filesize-reached? (max-filesize-reached? collection-name)]
+       (not max-filesize-reached?)))
 
 (defn collection-readable?
   ; @param (string) collection-name
