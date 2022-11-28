@@ -19,7 +19,14 @@
 ```
 
 ```
-@return (nil)
+@example
+(add-document! "my_collection" {...})
+=>
+{...}
+```
+
+```
+@return (map)
 ```
 
 <details>
@@ -28,9 +35,9 @@
 ```
 (defn add-document!
   [collection-name document]
-  (let [collection (reader/get-collection collection-name)
-        document   (time/unparse-date-time document)]
-       (set-collection! collection-name (engine/add-document collection document))))
+  (let [collection (reader/get-collection collection-name)]
+       (set-collection! collection-name (engine/add-document collection document))
+       (return document)))
 ```
 
 </details>
@@ -70,7 +77,14 @@
 ```
 
 ```
-@return (nil)
+@example
+(apply-document! "my_collection" "my-document" (fn [%] %))
+=>
+"my-document"
+```
+
+```
+@return (string)
 ```
 
 <details>
@@ -79,13 +93,9 @@
 ```
 (defn apply-document!
   [collection-name document-id f & params]
-  (let [collection       (reader/get-collection      collection-name)
-        document         (engine/get-document collection document-id)
-        params           (cons document params)
-        updated-document (apply f params)
-        updated-document (time/unparse-date-time updated-document)]
-       (set-collection! collection-name (-> collection (engine/remove-document document-id)
-                                                       (engine/add-document    updated-document)))))
+  (let [collection (reader/get-collection collection-name)]
+       (set-collection! collection-name (engine/apply-document collection document-id f params))
+       (return document-id)))
 ```
 
 </details>
@@ -591,7 +601,14 @@
 ```
 
 ```
-@return (nil)
+@example
+(remove-document! "my_collection" "my-document")
+=>
+"my-document"
+```
+
+```
+@return (string)
 ```
 
 <details>
@@ -601,7 +618,8 @@
 (defn remove-document!
   [collection-name document-id]
   (let [collection (reader/get-collection collection-name)]
-       (set-collection! collection-name (engine/remove-document collection document-id))))
+       (set-collection! collection-name (engine/remove-document collection document-id))
+       (return document-id)))
 ```
 
 </details>
@@ -633,7 +651,14 @@
 ```
 
 ```
-@return (nil)
+@example
+(remove-documents! "my_collection" ["my-document"])
+=>
+["my-document"]
+```
+
+```
+@return (strings in vector)
 ```
 
 <details>
@@ -643,7 +668,8 @@
 (defn remove-documents!
   [collection-name document-ids]
   (let [collection (reader/get-collection collection-name)]
-       (set-collection! collection-name (engine/remove-documents collection document-ids))))
+       (set-collection! collection-name (engine/remove-documents collection document-ids))
+       (return document-ids)))
 ```
 
 </details>
@@ -686,7 +712,8 @@
   [collection-name collection]
   (boolean (if (check/collection-writable? collection-name)
                (let [filepath (helpers/collection-name->filepath collection-name)]
-                    (io/write-edn-file! filepath collection {:abc? true})))))
+                    (io/write-edn-file! filepath collection {:abc? true :create? true}))
+               (println "local-db.actions:" collection-name "collection is not writable!"))))
 ```
 
 </details>
@@ -719,7 +746,14 @@
 ```
 
 ```
-@return (nil)
+@example
+(set-document! "my_collection" "my-document" {...})
+=>
+"my-document"
+```
+
+```
+@return (string)
 ```
 
 <details>
@@ -728,10 +762,10 @@
 ```
 (defn set-document!
   [collection-name document-id document]
-  (let [collection (reader/get-collection collection-name)
-        document   (time/unparse-date-time document)]
+  (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (-> collection (engine/remove-document document-id)
-                                                       (engine/add-document    document)))))
+                                                       (engine/add-document    document)))
+       (return document-id)))
 ```
 
 </details>
