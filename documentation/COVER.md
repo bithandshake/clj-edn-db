@@ -1,11 +1,13 @@
 
 # <strong>local-db-api</strong>
-<p>Documentation of the <strong>local-db-api</strong> Clojure library</p>
+
+<p>Documentation of the <strong>local-db-api</strong> Clojure / ClojureScript library</p>
 
 <strong>[README](../README.md) > DOCUMENTATION</strong>
 
 ### Public namespaces
-* [local-db.api](clj/local_db/API.md) [clj]
+
+* [local-db.api](clj/local-db/API.md) [clj]
 
 ---
 

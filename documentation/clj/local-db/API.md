@@ -1,10 +1,7 @@
 
 # <strong>local-db.api</strong> namespace
-<p>Documentation of the <strong>local_db/api.clj</strong> file</p>
 
-<strong>[README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > local-db.api</strong>
-
-
+<strong>[README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > </strong>source-code/clj/local_db/api.clj
 
 ### add-document!
 
@@ -46,10 +43,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [add-document!]]))
+(ns my-namespace (:require [local-db.api :refer [add-document!]]))
 
-(local-db/add-document! ...)
-(add-document!          ...)
+(local-db.api/add-document! ...)
+(add-document!              ...)
 ```
 
 </details>
@@ -104,10 +101,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [apply-document!]]))
+(ns my-namespace (:require [local-db.api :refer [apply-document!]]))
 
-(local-db/apply-document! ...)
-(apply-document!          ...)
+(local-db.api/apply-document! ...)
+(apply-document!              ...)
 ```
 
 </details>
@@ -146,10 +143,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [document-exists?]]))
+(ns my-namespace (:require [local-db.api :refer [document-exists?]]))
 
-(local-db/document-exists? ...)
-(document-exists?          ...)
+(local-db.api/document-exists? ...)
+(document-exists?              ...)
 ```
 
 </details>
@@ -188,10 +185,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [filter-document]]))
+(ns my-namespace (:require [local-db.api :refer [filter-document]]))
 
-(local-db/filter-document ...)
-(filter-document          ...)
+(local-db.api/filter-document ...)
+(filter-document              ...)
 ```
 
 </details>
@@ -230,10 +227,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [filter-documents]]))
+(ns my-namespace (:require [local-db.api :refer [filter-documents]]))
 
-(local-db/filter-documents ...)
-(filter-documents          ...)
+(local-db.api/filter-documents ...)
+(filter-documents              ...)
 ```
 
 </details>
@@ -273,10 +270,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [get-collection]]))
+(ns my-namespace (:require [local-db.api :refer [get-collection]]))
 
-(local-db/get-collection ...)
-(get-collection          ...)
+(local-db.api/get-collection ...)
+(get-collection              ...)
 ```
 
 </details>
@@ -315,10 +312,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [get-document]]))
+(ns my-namespace (:require [local-db.api :refer [get-document]]))
 
-(local-db/get-document ...)
-(get-document          ...)
+(local-db.api/get-document ...)
+(get-document              ...)
 ```
 
 </details>
@@ -358,10 +355,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [get-document-item]]))
+(ns my-namespace (:require [local-db.api :refer [get-document-item]]))
 
-(local-db/get-document-item ...)
-(get-document-item          ...)
+(local-db.api/get-document-item ...)
+(get-document-item              ...)
 ```
 
 </details>
@@ -403,10 +400,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [get-document-kv]]))
+(ns my-namespace (:require [local-db.api :refer [get-document-kv]]))
 
-(local-db/get-document-kv ...)
-(get-document-kv          ...)
+(local-db.api/get-document-kv ...)
+(get-document-kv              ...)
 ```
 
 </details>
@@ -445,10 +442,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [get-documents]]))
+(ns my-namespace (:require [local-db.api :refer [get-documents]]))
 
-(local-db/get-documents ...)
-(get-documents          ...)
+(local-db.api/get-documents ...)
+(get-documents              ...)
 ```
 
 </details>
@@ -490,10 +487,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [get-documents-kv]]))
+(ns my-namespace (:require [local-db.api :refer [get-documents-kv]]))
 
-(local-db/get-documents-kv ...)
-(get-documents-kv          ...)
+(local-db.api/get-documents-kv ...)
+(get-documents-kv              ...)
 ```
 
 </details>
@@ -534,10 +531,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [match-document]]))
+(ns my-namespace (:require [local-db.api :refer [match-document]]))
 
-(local-db/match-document ...)
-(match-document          ...)
+(local-db.api/match-document ...)
+(match-document              ...)
 ```
 
 </details>
@@ -578,10 +575,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [match-documents]]))
+(ns my-namespace (:require [local-db.api :refer [match-documents]]))
 
-(local-db/match-documents ...)
-(match-documents          ...)
+(local-db.api/match-documents ...)
+(match-documents              ...)
 ```
 
 </details>
@@ -628,10 +625,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [remove-document!]]))
+(ns my-namespace (:require [local-db.api :refer [remove-document!]]))
 
-(local-db/remove-document! ...)
-(remove-document!          ...)
+(local-db.api/remove-document! ...)
+(remove-document!              ...)
 ```
 
 </details>
@@ -678,10 +675,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [remove-documents!]]))
+(ns my-namespace (:require [local-db.api :refer [remove-documents!]]))
 
-(local-db/remove-documents! ...)
-(remove-documents!          ...)
+(local-db.api/remove-documents! ...)
+(remove-documents!              ...)
 ```
 
 </details>
@@ -722,10 +719,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [set-collection!]]))
+(ns my-namespace (:require [local-db.api :refer [set-collection!]]))
 
-(local-db/set-collection! ...)
-(set-collection!          ...)
+(local-db.api/set-collection! ...)
+(set-collection!              ...)
 ```
 
 </details>
@@ -774,10 +771,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :as local-db :refer [set-document!]]))
+(ns my-namespace (:require [local-db.api :refer [set-document!]]))
 
-(local-db/set-document! ...)
-(set-document!          ...)
+(local-db.api/set-document! ...)
+(set-document!              ...)
 ```
 
 </details>
