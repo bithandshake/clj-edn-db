@@ -21,7 +21,7 @@ Check out the latest commit on the [release branch](https://github.com/bithandsh
 
 ### Documentation
 
-The <strong>local-db-api</strong> documentation is [available here](documentation/COVER.md).
+The <strong>local-db-api</strong> functional documentation is [available here](documentation/COVER.md).
 
 ### Changelog
 
