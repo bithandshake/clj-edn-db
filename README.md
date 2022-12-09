@@ -1,8 +1,6 @@
 
 # local-db-api
 
-...
-
 ### Overview
 
 The <strong>local-db-api</strong> is a lightweight Clojure document-collection
