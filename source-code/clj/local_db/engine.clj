@@ -263,7 +263,7 @@
   ;
   ; @return (maps in vector)
   [collection document]
-  (let [document (document<-document-id document)
+  (let [document (document<-document-id  document)
         document (time/unparse-date-time document)]
        (if (empty? collection)
            (vector/conj-item collection document)
@@ -307,19 +307,19 @@
                  (conj   result document)))]
          (reduce f [] collection)))
 
-(defn apply-document
+(defn apply-on-document
   ; @param (maps in vector) collection
   ; @param (string) document-id
   ; @param (function) f
   ; @param (list of *)(opt) params
   ;
   ; @usage
-  ; (apply-document [{:id "my-document" :label "My document"}]
-  ;                 "my-document" assoc :foo "bar")
+  ; (apply-on-document [{:id "my-document" :label "My document"}]
+  ;                    "my-document" assoc :foo "bar")
   ;
   ; @usage
-  ; (apply-document [{:id "my-document" :label "My document"}]
-  ;                 "my-document" (fn [document] (assoc document :foo "bar")))
+  ; (apply-on-document [{:id "my-document" :label "My document"}]
+  ;                    "my-document" (fn [document] (assoc document :foo "bar")))
   ;
   ; @return (maps in vector)
   [collection document-id f & [params]]

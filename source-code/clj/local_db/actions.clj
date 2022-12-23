@@ -30,6 +30,8 @@
 (defn add-document!
   ; @param (string) collection-name
   ; @param (map) document
+  ; {:id (string)(opt)
+  ;  :namespace/id (string)(opt)}
   ;
   ; @usage
   ; (add-document! "my_collection" {...})
@@ -101,26 +103,26 @@
                                                        (engine/add-document    document)))
        (return document-id)))
 
-(defn apply-document!
+(defn apply-on-document!
   ; @param (string) collection-name
   ; @param (string) document-id
   ; @param (function) f
   ; @param (list of *)(opt) params
   ;
   ; @usage
-  ; (apply-document! "my_collection" "my-document" assoc :foo "bar")
+  ; (apply-on-document! "my_collection" "my-document" assoc :foo "bar")
   ;
   ; @usage
-  ; (apply-document! "my_collection" "my-document"
-  ;                  (fn [document] (assoc document :foo "bar")))
+  ; (apply-on-document! "my_collection" "my-document"
+  ;                     (fn [document] (assoc document :foo "bar")))
   ;
   ; @example
-  ; (apply-document! "my_collection" "my-document" (fn [%] %))
+  ; (apply-on-document! "my_collection" "my-document" (fn [%] %))
   ; =>
   ; "my-document"
   ;
   ; @return (string)
   [collection-name document-id f & params]
   (let [collection (reader/get-collection collection-name)]
-       (set-collection! collection-name (engine/apply-document collection document-id f params))
+       (set-collection! collection-name (engine/apply-on-document collection document-id f params))
        (return document-id)))
