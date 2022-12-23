@@ -7,8 +7,6 @@
 
 - [add-document!](#add-document)
 
-- [apply-document!](#apply-document)
-
 - [document-exists?](#document-exists)
 
 - [filter-document](#filter-document)
@@ -44,6 +42,8 @@
 ```
 @param (string) collection-name
 @param (map) document
+{:id (string)(opt)
+ :namespace/id (string)(opt)}
 ```
 
 ```
@@ -83,64 +83,6 @@
 
 (local-db.api/add-document! ...)
 (add-document!              ...)
-```
-
-</details>
-
----
-
-### apply-document!
-
-```
-@param (string) collection-name
-@param (string) document-id
-@param (function) f
-@param (list of *)(opt) params
-```
-
-```
-@usage
-(apply-document! "my_collection" "my-document" assoc :foo "bar")
-```
-
-```
-@usage
-(apply-document! "my_collection" "my-document"
-                 (fn [document] (assoc document :foo "bar")))
-```
-
-```
-@example
-(apply-document! "my_collection" "my-document" (fn [%] %))
-=>
-"my-document"
-```
-
-```
-@return (string)
-```
-
-<details>
-<summary>Source code</summary>
-
-```
-(defn apply-document!
-  [collection-name document-id f & params]
-  (let [collection (reader/get-collection collection-name)]
-       (set-collection! collection-name (engine/apply-document collection document-id f params))
-       (return document-id)))
-```
-
-</details>
-
-<details>
-<summary>Require</summary>
-
-```
-(ns my-namespace (:require [local-db.api :refer [apply-document!]]))
-
-(local-db.api/apply-document! ...)
-(apply-document!              ...)
 ```
 
 </details>
