@@ -7,6 +7,8 @@
 
 - [add-document!](#add-document)
 
+- [apply-on-document!](#apply-on-document)
+
 - [document-exists?](#document-exists)
 
 - [filter-document](#filter-document)
@@ -83,6 +85,64 @@
 
 (local-db.api/add-document! ...)
 (add-document!              ...)
+```
+
+</details>
+
+---
+
+### apply-on-document!
+
+```
+@param (string) collection-name
+@param (string) document-id
+@param (function) f
+@param (list of *)(opt) params
+```
+
+```
+@usage
+(apply-on-document! "my_collection" "my-document" assoc :foo "bar")
+```
+
+```
+@usage
+(apply-on-document! "my_collection" "my-document"
+                    (fn [document] (assoc document :foo "bar")))
+```
+
+```
+@example
+(apply-on-document! "my_collection" "my-document" (fn [%] %))
+=>
+"my-document"
+```
+
+```
+@return (string)
+```
+
+<details>
+<summary>Source code</summary>
+
+```
+(defn apply-on-document!
+  [collection-name document-id f & params]
+  (let [collection (reader/get-collection collection-name)]
+       (set-collection! collection-name (engine/apply-on-document collection document-id f params))
+       (return document-id)))
+```
+
+</details>
+
+<details>
+<summary>Require</summary>
+
+```
+(ns my-namespace (:require [local-db.api :refer [apply-on-document!]]))
+
+(local-db.api/apply-on-document! ...)
+(apply-on-document!              ...)
 ```
 
 </details>

@@ -7,12 +7,12 @@
 ;; ----------------------------------------------------------------------------
 
 ; local-db.actions
-(def set-collection!   actions/set-collection!)
-(def add-document!     actions/add-document!)
-(def remove-documents! actions/remove-documents!)
-(def remove-document!  actions/remove-document!)
-(def set-document!     actions/set-document!)
-(def apply-document!   actions/apply-document!)
+(def set-collection!    actions/set-collection!)
+(def add-document!      actions/add-document!)
+(def remove-documents!  actions/remove-documents!)
+(def remove-document!   actions/remove-document!)
+(def set-document!      actions/set-document!)
+(def apply-on-document! actions/apply-on-document!)
 
 ; local-db.reader
 (def get-collection    reader/get-collection)
