@@ -1,8 +1,7 @@
 
-
 # local-db-api documentation
 
-Documentation of the [local-db-api](https://github.com/bithandshake-hq/local-db-api) Clojure library
+Documentation of the [local-db-api](https://github.com/bithandshake/local-db-api) Clojure library
 
 ##### [README](../README.md) > DOCUMENTATION
 

@@ -39,7 +39,7 @@ You can track the changes of the <strong>local-db-api</strong> library [here](CH
 
 - [How to get a document from a collection found by its ID?](#how-to-get-a-document-from-a-collection-found-by-its-id)
 
-- [How to get more than one document from a collection found by their ID-s?](#how-to-get-more-than-one-document-from-a-collection-found-by-their-id-s)
+- [How to get more than one document from a collection found by their IDs?](#how-to-get-more-than-one-document-from-a-collection-found-by-their-ids)
 
 - [How to get documents from a collection filtered by a function?](#how-to-get-documents-from-a-collection-filtered-by-a-function)
 
@@ -117,7 +117,7 @@ function removes a document from a collection found by its ID.
 ### How to remove more than one document?
 
 The [`local-db.api/remove-documents!`](documentation/clj/local-db/API.md/#remove-documents)
-function removes multiple documents from a collection found by their ID-s.
+function removes multiple documents from a collection found by their IDs.
 
 ```
 (remove-documents! "my_collection" ["my-document" "your-document"])
@@ -158,10 +158,10 @@ function returns with a document from a collection found by its ID.
 (get-document "my_collection" "my-document")
 ```
 
-### How to get more than one document from a collection found by their ID-s?
+### How to get more than one document from a collection found by their IDs?
 
 The [`local-db.api/get-documents`](documentation/clj/local-db/API.md/#get-documents)
-function returns with documents from a collection found by their ID-s.
+function returns with documents from a collection found by their IDs.
 
 ```
 (get-documents "my_collection" ["my-document" "your-document"])
