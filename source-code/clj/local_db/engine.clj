@@ -1,8 +1,8 @@
 
 (ns local-db.engine
-    (:require [candy.api   :refer [return]]
-              [keyword.api :as keyword]
+    (:require [keyword.api :as keyword]
               [map.api     :as map]
+              [noop.api    :refer [return]]
               [random.api  :as random]
               [time.api    :as time]
               [vector.api  :as vector]))

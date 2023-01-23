@@ -1,11 +1,11 @@
 
 (ns local-db.actions
-    (:require [candy.api        :refer [return]]
-              [io.api           :as io]
+    (:require [io.api           :as io]
               [local-db.check   :as check]
               [local-db.engine  :as engine]
               [local-db.helpers :as helpers]
-              [local-db.reader  :as reader]))
+              [local-db.reader  :as reader]
+              [noop.api         :refer [return]]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
