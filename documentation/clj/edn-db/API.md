@@ -1,7 +1,7 @@
 
-# local-db.api Clojure namespace
+# edn-db.api Clojure namespace
 
-##### [README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > local-db.api
+##### [README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > edn-db.api
 
 ### Index
 
@@ -81,10 +81,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [add-document!]]))
+(ns my-namespace (:require [edn-db.api :refer [add-document!]]))
 
-(local-db.api/add-document! ...)
-(add-document!              ...)
+(edn-db.api/add-document! ...)
+(add-document!            ...)
 ```
 
 </details>
@@ -139,10 +139,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [apply-on-document!]]))
+(ns my-namespace (:require [edn-db.api :refer [apply-on-document!]]))
 
-(local-db.api/apply-on-document! ...)
-(apply-on-document!              ...)
+(edn-db.api/apply-on-document! ...)
+(apply-on-document!            ...)
 ```
 
 </details>
@@ -181,10 +181,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [document-exists?]]))
+(ns my-namespace (:require [edn-db.api :refer [document-exists?]]))
 
-(local-db.api/document-exists? ...)
-(document-exists?              ...)
+(edn-db.api/document-exists? ...)
+(document-exists?            ...)
 ```
 
 </details>
@@ -223,10 +223,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [filter-document]]))
+(ns my-namespace (:require [edn-db.api :refer [filter-document]]))
 
-(local-db.api/filter-document ...)
-(filter-document              ...)
+(edn-db.api/filter-document ...)
+(filter-document            ...)
 ```
 
 </details>
@@ -265,10 +265,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [filter-documents]]))
+(ns my-namespace (:require [edn-db.api :refer [filter-documents]]))
 
-(local-db.api/filter-documents ...)
-(filter-documents              ...)
+(edn-db.api/filter-documents ...)
+(filter-documents            ...)
 ```
 
 </details>
@@ -308,10 +308,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [get-collection]]))
+(ns my-namespace (:require [edn-db.api :refer [get-collection]]))
 
-(local-db.api/get-collection ...)
-(get-collection              ...)
+(edn-db.api/get-collection ...)
+(get-collection            ...)
 ```
 
 </details>
@@ -350,10 +350,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [get-document]]))
+(ns my-namespace (:require [edn-db.api :refer [get-document]]))
 
-(local-db.api/get-document ...)
-(get-document              ...)
+(edn-db.api/get-document ...)
+(get-document            ...)
 ```
 
 </details>
@@ -393,10 +393,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [get-document-item]]))
+(ns my-namespace (:require [edn-db.api :refer [get-document-item]]))
 
-(local-db.api/get-document-item ...)
-(get-document-item              ...)
+(edn-db.api/get-document-item ...)
+(get-document-item            ...)
 ```
 
 </details>
@@ -438,10 +438,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [get-document-kv]]))
+(ns my-namespace (:require [edn-db.api :refer [get-document-kv]]))
 
-(local-db.api/get-document-kv ...)
-(get-document-kv              ...)
+(edn-db.api/get-document-kv ...)
+(get-document-kv            ...)
 ```
 
 </details>
@@ -480,10 +480,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [get-documents]]))
+(ns my-namespace (:require [edn-db.api :refer [get-documents]]))
 
-(local-db.api/get-documents ...)
-(get-documents              ...)
+(edn-db.api/get-documents ...)
+(get-documents            ...)
 ```
 
 </details>
@@ -525,10 +525,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [get-documents-kv]]))
+(ns my-namespace (:require [edn-db.api :refer [get-documents-kv]]))
 
-(local-db.api/get-documents-kv ...)
-(get-documents-kv              ...)
+(edn-db.api/get-documents-kv ...)
+(get-documents-kv            ...)
 ```
 
 </details>
@@ -569,10 +569,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [match-document]]))
+(ns my-namespace (:require [edn-db.api :refer [match-document]]))
 
-(local-db.api/match-document ...)
-(match-document              ...)
+(edn-db.api/match-document ...)
+(match-document            ...)
 ```
 
 </details>
@@ -613,10 +613,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [match-documents]]))
+(ns my-namespace (:require [edn-db.api :refer [match-documents]]))
 
-(local-db.api/match-documents ...)
-(match-documents              ...)
+(edn-db.api/match-documents ...)
+(match-documents            ...)
 ```
 
 </details>
@@ -663,10 +663,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [remove-document!]]))
+(ns my-namespace (:require [edn-db.api :refer [remove-document!]]))
 
-(local-db.api/remove-document! ...)
-(remove-document!              ...)
+(edn-db.api/remove-document! ...)
+(remove-document!            ...)
 ```
 
 </details>
@@ -713,10 +713,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [remove-documents!]]))
+(ns my-namespace (:require [edn-db.api :refer [remove-documents!]]))
 
-(local-db.api/remove-documents! ...)
-(remove-documents!              ...)
+(edn-db.api/remove-documents! ...)
+(remove-documents!            ...)
 ```
 
 </details>
@@ -748,7 +748,7 @@
   (boolean (if (check/collection-writable? collection-name)
                (let [filepath (helpers/collection-name->filepath collection-name)]
                     (io/write-edn-file! filepath collection {:abc? true :create? true}))
-               (println "local-db.actions:" collection-name "collection is not writable!"))))
+               (println "edn-db.actions:" collection-name "collection is not writable!"))))
 ```
 
 </details>
@@ -757,10 +757,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [set-collection!]]))
+(ns my-namespace (:require [edn-db.api :refer [set-collection!]]))
 
-(local-db.api/set-collection! ...)
-(set-collection!              ...)
+(edn-db.api/set-collection! ...)
+(set-collection!            ...)
 ```
 
 </details>
@@ -809,10 +809,10 @@
 <summary>Require</summary>
 
 ```
-(ns my-namespace (:require [local-db.api :refer [set-document!]]))
+(ns my-namespace (:require [edn-db.api :refer [set-document!]]))
 
-(local-db.api/set-document! ...)
-(set-document!              ...)
+(edn-db.api/set-document! ...)
+(set-document!            ...)
 ```
 
 </details>

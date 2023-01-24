@@ -1,5 +1,5 @@
 
-(ns local-db.engine
+(ns edn-db.engine
     (:require [keyword.api :as keyword]
               [map.api     :as map]
               [noop.api    :refer [return]]
@@ -11,6 +11,8 @@
 ;; ----------------------------------------------------------------------------
 
 (defn collection->namespace
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ;
   ; @usage
@@ -25,6 +27,8 @@
 ;; ----------------------------------------------------------------------------
 
 (defn document<-document-id
+  ; @ignore
+  ;
   ; @param (map) document
   ;
   ; @example
@@ -63,6 +67,8 @@
 ;; ----------------------------------------------------------------------------
 
 (defn trim-collection
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ; @param (integer) max-count
   ; @param (integer)(opt) skip
@@ -91,6 +97,8 @@
    (take max-count (drop skip collection))))
 
 (defn filter-documents
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ; @param (function) filter-f
   ;
@@ -108,6 +116,8 @@
          (reduce f [] collection)))
 
 (defn filter-document
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ; @param (function) filter-f
   ;
@@ -119,7 +129,10 @@
   (vector/first-filtered collection filter-f))
 
 (defn match-documents
-  ; Get documents by pattern
+  ; @ignore
+  ;
+  ; @description
+  ; Returns documents found by the given pattern
   ;
   ; @param (maps in vector) collection
   ; @param (map) pattern
@@ -140,7 +153,10 @@
          (reduce f [] collection)))
 
 (defn match-document
-  ; Get first document by pattern
+  ; @ignore
+  ;
+  ; @description
+  ; Returns the first document found by the given pattern
   ;
   ; @param (maps in vector) collection
   ; @param (map) pattern
@@ -155,7 +171,10 @@
   (vector/first-filtered collection #(map/match-pattern? % pattern)))
 
 (defn get-documents-kv
-  ; Get documents by value
+  ; @ignore
+  ;
+  ; @description
+  ; Returns documents found by the given value
   ;
   ; @param (maps in vector) collection
   ; @param (keyword) item-key
@@ -177,7 +196,10 @@
          (reduce f [] collection)))
 
 (defn get-document-kv
-  ; Get first document by value
+  ; @ignore
+  ;
+  ; @description
+  ; Returns the first document found by the given value
   ;
   ; @param (maps in vector) collection
   ; @param (keyword) item-key
@@ -193,7 +215,10 @@
   (vector/first-filtered collection #(= item-value (get % item-key))))
 
 (defn get-document
-  ; Get (first) document by id
+  ; @ignore
+  ;
+  ; @description
+  ; Returns (first) document found by the given ID
   ;
   ; @param (maps in vector) collection
   ; @param (string) document-id
@@ -209,6 +234,8 @@
           (get-document-kv collection :id document-id)))
 
 (defn get-document-item
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ; @param (string) document-id
   ; @param (keyword) item-key
@@ -226,6 +253,8 @@
        (get document item-key)))
 
 (defn get-documents
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ; @param (strings in vector) document-ids
   ;
@@ -243,6 +272,8 @@
          (reduce f [] collection)))
 
 (defn add-document
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ; @param (keyword) document
   ;
@@ -274,6 +305,8 @@
                         (vector/conj-item collection document))))))
 
 (defn remove-document
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ; @param (string) document-id
   ;
@@ -291,6 +324,8 @@
          (reduce f [] collection)))
 
 (defn remove-documents
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ; @param (strings in vector) document-ids
   ;
@@ -308,6 +343,8 @@
          (reduce f [] collection)))
 
 (defn apply-on-document
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ; @param (string) document-id
   ; @param (function) f
@@ -331,6 +368,8 @@
                       (add-document    updated-document))))
 
 (defn document-exists?
+  ; @ignore
+  ;
   ; @param (maps in vector) collection
   ; @param (string) document-id
   ;

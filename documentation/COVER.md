@@ -7,7 +7,7 @@ Documentation of the [local-db-api](https://github.com/bithandshake/local-db-api
 
 ### Clojure namespaces
 
-* [local-db.api](clj/local-db/API.md)
+* [edn-db.api](clj/edn-db/API.md)
 
 ---
 

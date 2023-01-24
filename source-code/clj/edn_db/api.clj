@@ -1,12 +1,12 @@
 
-(ns local-db.api
-    (:require [local-db.actions :as actions]
-              [local-db.reader  :as reader]))
+(ns edn-db.api
+    (:require [edn-db.actions :as actions]
+              [edn-db.reader  :as reader]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-; local-db.actions
+; edn-db.actions
 (def set-collection!    actions/set-collection!)
 (def add-document!      actions/add-document!)
 (def remove-documents!  actions/remove-documents!)
@@ -14,7 +14,7 @@
 (def set-document!      actions/set-document!)
 (def apply-on-document! actions/apply-on-document!)
 
-; local-db.reader
+; edn-db.reader
 (def get-collection    reader/get-collection)
 (def filter-documents  reader/filter-documents)
 (def filter-document   reader/filter-document)

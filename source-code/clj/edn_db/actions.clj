@@ -1,11 +1,11 @@
 
-(ns local-db.actions
-    (:require [io.api           :as io]
-              [local-db.check   :as check]
-              [local-db.engine  :as engine]
-              [local-db.helpers :as helpers]
-              [local-db.reader  :as reader]
-              [noop.api         :refer [return]]))
+(ns edn-db.actions
+    (:require [edn-db.check   :as check]
+              [edn-db.engine  :as engine]
+              [edn-db.helpers :as helpers]
+              [edn-db.reader  :as reader]
+              [io.api         :as io]
+              [noop.api       :refer [return]]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -22,7 +22,7 @@
   (boolean (if (check/collection-writable? collection-name)
                (let [filepath (helpers/collection-name->filepath collection-name)]
                     (io/write-edn-file! filepath collection {:abc? true :create? true}))
-               (println "local-db.actions:" collection-name "collection is not writable!"))))
+               (println "edn-db.actions:" collection-name "collection is not writable!"))))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

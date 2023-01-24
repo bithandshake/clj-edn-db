@@ -1,12 +1,16 @@
 
-(ns local-db.config
+(ns edn-db.config
     (:require [io.api :as io]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
+; @ignore
+;
 ; @constant (B)
 (def MAX-FILESIZE (io/MB->B 10))
 
+; @ignore
+;
 ; @constant (string)
-(def LOCAL-DB-PATH "environment/db/")
+(def EDN-DB-PATH "environment/edn-db/")

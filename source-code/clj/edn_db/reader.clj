@@ -1,9 +1,9 @@
 
-(ns local-db.reader
-    (:require [io.api           :as io]
-              [local-db.check   :as check]
-              [local-db.engine  :as engine]
-              [local-db.helpers :as helpers]))
+(ns edn-db.reader
+    (:require [edn-db.check   :as check]
+              [edn-db.engine  :as engine]
+              [edn-db.helpers :as helpers]
+              [io.api         :as io]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

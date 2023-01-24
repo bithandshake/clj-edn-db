@@ -1,8 +1,8 @@
 
-(ns local-db.check
-    (:require [io.api           :as io]
-              [local-db.config  :as config]
-              [local-db.helpers :as helpers]))
+(ns edn-db.check
+    (:require [edn-db.config  :as config]
+              [edn-db.helpers :as helpers]
+              [io.api         :as io]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

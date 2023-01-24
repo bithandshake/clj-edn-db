@@ -1,29 +1,29 @@
 
-# local-db-api
+# clj-edn-db
 
 ### Overview
 
-The <strong>local-db-api</strong> is a lightweight Clojure document-collection
+The <strong>clj-edn-db</strong> is a lightweight Clojure document-collection
 database stored in EDN files.
 
 ### deps.edn
 
 ```
-{:deps {bithandshake/local-db-api {:git/url "https://github.com/bithandshake/local-db-api"
-                                   :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
+{:deps {bithandshake/clj-edn-db {:git/url "https://github.com/bithandshake/clj-edn-db"
+                                 :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
 ```
 
 ### Current version
 
-Check out the latest commit on the [release branch](https://github.com/bithandshake/local-db-api/tree/release).
+Check out the latest commit on the [release branch](https://github.com/bithandshake/clj-edn-db/tree/release).
 
 ### Documentation
 
-The <strong>local-db-api</strong> functional documentation is [available here](documentation/COVER.md).
+The <strong>clj-edn-db</strong> functional documentation is [available here](documentation/COVER.md).
 
 ### Changelog
 
-You can track the changes of the <strong>local-db-api</strong> library [here](CHANGES.md).
+You can track the changes of the <strong>clj-edn-db</strong> library [here](CHANGES.md).
 
 ### Index
 
@@ -59,11 +59,11 @@ You can track the changes of the <strong>local-db-api</strong> library [here](CH
 
 # Usage
 
-> The `local-db.api` manages both namespaced and non namespaced documents and collections.
+> The `edn-db.api` manages both namespaced and non namespaced documents and collections.
 
 ### How to add a document?
 
-The [`local-db.api/add-document!`](documentation/clj/local-db/API.md/#add-document)
+The [`edn-db.api/add-document!`](documentation/clj/edn-db/API.md/#add-document)
 function adds a document to a collection.
 
 - If the document doesn't have an ID, the function will generate one for it.
@@ -84,7 +84,7 @@ function adds a document to a collection.
 (add-document! "my_collection" {:namespace/my-string "My value"})
 ```
 
-The [`local-db.api/set-document!`](documentation/clj/local-db/API.md/#set-document)
+The [`edn-db.api/set-document!`](documentation/clj/edn-db/API.md/#set-document)
 function adds a document to a collection.
 
 - If the document doesn't have an ID, the function will generate one for it.
@@ -107,7 +107,7 @@ function adds a document to a collection.
 
 ### How to remove a document?
 
-The [`local-db.api/remove-document!`](documentation/clj/local-db/API.md/#remove-document)
+The [`edn-db.api/remove-document!`](documentation/clj/edn-db/API.md/#remove-document)
 function removes a document from a collection found by its ID.
 
 ```
@@ -116,7 +116,7 @@ function removes a document from a collection found by its ID.
 
 ### How to remove more than one document?
 
-The [`local-db.api/remove-documents!`](documentation/clj/local-db/API.md/#remove-documents)
+The [`edn-db.api/remove-documents!`](documentation/clj/edn-db/API.md/#remove-documents)
 function removes multiple documents from a collection found by their IDs.
 
 ```
@@ -125,7 +125,7 @@ function removes multiple documents from a collection found by their IDs.
 
 ### How to apply a function on a document?
 
-The [`local-db.api/apply-on-document!`](documentation/clj/local-db/API.md/#apply-on-document)
+The [`edn-db.api/apply-on-document!`](documentation/clj/edn-db/API.md/#apply-on-document)
 function applies the given function on a document found by its ID.
 
 ```
@@ -142,7 +142,7 @@ function applies the given function on a document found by its ID.
 
 ### How to get all documents from a collection?
 
-The [`local-db.api/get-collection`](documentation/clj/local-db/API.md/#get-collection)
+The [`edn-db.api/get-collection`](documentation/clj/edn-db/API.md/#get-collection)
 function returns with the documents in a collection.
 
 ```
@@ -151,7 +151,7 @@ function returns with the documents in a collection.
 
 ### How to get a document from a collection found by its ID?
 
-The [`local-db.api/get-document`](documentation/clj/local-db/API.md/#get-document)
+The [`edn-db.api/get-document`](documentation/clj/edn-db/API.md/#get-document)
 function returns with a document from a collection found by its ID.
 
 ```
@@ -160,7 +160,7 @@ function returns with a document from a collection found by its ID.
 
 ### How to get more than one document from a collection found by their IDs?
 
-The [`local-db.api/get-documents`](documentation/clj/local-db/API.md/#get-documents)
+The [`edn-db.api/get-documents`](documentation/clj/edn-db/API.md/#get-documents)
 function returns with documents from a collection found by their IDs.
 
 ```
@@ -169,7 +169,7 @@ function returns with documents from a collection found by their IDs.
 
 ### How to get documents from a collection filtered by a function?
 
-The [`local-db.api/filter-documents`](documentation/clj/local-db/API.md/#filter-documents)
+The [`edn-db.api/filter-documents`](documentation/clj/edn-db/API.md/#filter-documents)
 function returns with the documents in a collection filtered by the given function.
 
 ```
@@ -178,7 +178,7 @@ function returns with the documents in a collection filtered by the given functi
 
 ### How to get the first document from a collection filtered by a function?
 
-The [`local-db.api/filter-document`](documentation/clj/local-db/API.md/#filter-document)
+The [`edn-db.api/filter-document`](documentation/clj/edn-db/API.md/#filter-document)
 function returns with the first document in a collection filtered by the given function.
 
 ```
@@ -187,7 +187,7 @@ function returns with the first document in a collection filtered by the given f
 
 ### How to get documents from a collection filtered by a query?
 
-The [`local-db.api/match-documents`](documentation/clj/local-db/API.md/#match-documents)
+The [`edn-db.api/match-documents`](documentation/clj/edn-db/API.md/#match-documents)
 function returns with the documents in a collection filtered by the given pattern.
 
 ```
@@ -196,7 +196,7 @@ function returns with the documents in a collection filtered by the given patter
 
 ### How to get the first document from a collection filtered by a query?
 
-The [`local-db.api/match-document`](documentation/clj/local-db/API.md/#match-document)
+The [`edn-db.api/match-document`](documentation/clj/edn-db/API.md/#match-document)
 function returns with the first document in a collection filtered by the given pattern.
 
 ```
@@ -205,7 +205,7 @@ function returns with the first document in a collection filtered by the given p
 
 ### How to get documents from a collection filtered by a key/value pair?
 
-The [`local-db.api/get-documents-kv`](documentation/clj/local-db/API.md/#get-documents-kv)
+The [`edn-db.api/get-documents-kv`](documentation/clj/edn-db/API.md/#get-documents-kv)
 function returns with the documents in a collection filtered by the key/value pair.
 
 ```
@@ -214,7 +214,7 @@ function returns with the documents in a collection filtered by the key/value pa
 
 ### How to get the first document from a collection filtered by a key/value pair?
 
-The [`local-db.api/get-document-kv`](documentation/clj/local-db/API.md/#get-document-kv)
+The [`edn-db.api/get-document-kv`](documentation/clj/edn-db/API.md/#get-document-kv)
 function returns with the first document in a collection filtered by the given key/value pair.
 
 ```
@@ -223,7 +223,7 @@ function returns with the first document in a collection filtered by the given k
 
 ### How to get a specific value from a document found by its ID?
 
-The [`local-db.api/get-document-item`](documentation/clj/local-db/API.md/#get-document-item)
+The [`edn-db.api/get-document-item`](documentation/clj/edn-db/API.md/#get-document-item)
 function returns with a specific value in document found by its ID.
 
 ```
@@ -232,7 +232,7 @@ function returns with a specific value in document found by its ID.
 
 ### How to check whether a document exists?
 
-The [`local-db.api/document-exists?`](documentation/clj/local-db/API.md/#document-exists)
+The [`edn-db.api/document-exists?`](documentation/clj/edn-db/API.md/#document-exists)
 function returns TRUE if a document found in the collection with the given ID.
 
 ```

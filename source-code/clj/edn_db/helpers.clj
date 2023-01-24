@@ -1,12 +1,14 @@
 
-(ns local-db.helpers
-    (:require [local-db.config :as config]
-              [string.api      :as string]))
+(ns edn-db.helpers
+    (:require [edn-db.config :as config]
+              [string.api    :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
 (defn collection-name-valid?
+  ; @ignore
+  ;
   ; @param (*) collection-name
   ;
   ; @usage
@@ -17,6 +19,8 @@
   (string/nonblank? collection-name))
 
 (defn collection-name->filepath
+  ; @ignore
+  ;
   ; @param (string) collection-name
   ;
   ; @usage
@@ -24,4 +28,4 @@
   ;
   ; @return (string)
   [collection-name]
-  (str config/LOCAL-DB-PATH collection-name ".edn"))
+  (str config/EDN-DB-PATH collection-name ".edn"))
