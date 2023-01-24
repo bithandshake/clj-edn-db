@@ -1,7 +1,7 @@
 
-# local-db-api documentation
+# clj-edn-db documentation
 
-Documentation of the [local-db-api](https://github.com/bithandshake/local-db-api) Clojure library
+Documentation of the [clj-edn-db](https://github.com/bithandshake/clj-edn-db) Clojure library
 
 ##### [README](../README.md) > DOCUMENTATION
 
