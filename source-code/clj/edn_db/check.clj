@@ -1,8 +1,8 @@
 
 (ns edn-db.check
-    (:require [edn-db.config  :as config]
-              [edn-db.helpers :as helpers]
-              [io.api         :as io]))
+    (:require [edn-db.config :as config]
+              [edn-db.utils  :as utils]
+              [io.api        :as io]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -15,8 +15,7 @@
   ;
   ; @return (boolean)
   [collection-name]
-  (let [filepath (helpers/collection-name->filepath collection-name)]
-       (io/max-filesize-reached? filepath config/MAX-FILESIZE)))
+  (-> collection-name utils/collection-name->filepath (io/max-filesize-reached? config/MAX-FILESIZE)))
 
 (defn collection-exists?
   ; @param (string) collection-name
@@ -26,8 +25,7 @@
   ;
   ; @return (boolean)
   [collection-name]
-  (let [filepath (helpers/collection-name->filepath collection-name)]
-       (io/file-exists? filepath)))
+  (-> collection-name utils/collection-name->filepath io/file-exists?))
 
 (defn collection-writable?
   ; @param (string) collection-name
@@ -37,8 +35,7 @@
   ;
   ; @return (boolean)
   [collection-name]
-  (let [max-filesize-reached? (max-filesize-reached? collection-name)]
-       (not max-filesize-reached?)))
+  (-> collection-name max-filesize-reached? not))
 
 (defn collection-readable?
   ; @param (string) collection-name
@@ -48,5 +45,4 @@
   ;
   ; @return (boolean)
   [collection-name]
-  (let [filepath (helpers/collection-name->filepath collection-name)]
-       (io/file-exists? filepath)))
+  (-> collection-name utils/collection-name->filepath io/file-exists?))

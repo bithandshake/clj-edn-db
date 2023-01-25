@@ -1,9 +1,9 @@
 
 (ns edn-db.reader
-    (:require [edn-db.check   :as check]
-              [edn-db.engine  :as engine]
-              [edn-db.helpers :as helpers]
-              [io.api         :as io]))
+    (:require [edn-db.check  :as check]
+              [edn-db.engine :as engine]
+              [edn-db.utils  :as utils]
+              [io.api        :as io]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -19,7 +19,7 @@
   ; @return (vector)
   [collection-name]
   (if (check/collection-exists? collection-name)
-      (-> collection-name helpers/collection-name->filepath io/read-edn-file)))
+      (-> collection-name utils/collection-name->filepath io/read-edn-file)))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

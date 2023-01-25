@@ -1,11 +1,11 @@
 
 (ns edn-db.actions
-    (:require [edn-db.check   :as check]
-              [edn-db.engine  :as engine]
-              [edn-db.helpers :as helpers]
-              [edn-db.reader  :as reader]
-              [io.api         :as io]
-              [noop.api       :refer [return]]))
+    (:require [edn-db.check  :as check]
+              [edn-db.engine :as engine]
+              [edn-db.reader :as reader]
+              [edn-db.utils  :as utils]
+              [io.api        :as io]
+              [noop.api      :refer [return]]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -20,7 +20,7 @@
   ; @return (boolean)
   [collection-name collection]
   (boolean (if (check/collection-writable? collection-name)
-               (let [filepath (helpers/collection-name->filepath collection-name)]
+               (let [filepath (utils/collection-name->filepath collection-name)]
                     (io/write-edn-file! filepath collection {:abc? true :create? true}))
                (println "edn-db.actions:" collection-name "collection is not writable!"))))
 

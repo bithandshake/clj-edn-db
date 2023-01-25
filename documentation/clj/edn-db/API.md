@@ -299,7 +299,7 @@
 (defn get-collection
   [collection-name]
   (if (check/collection-exists? collection-name)
-      (-> collection-name helpers/collection-name->filepath io/read-edn-file)))
+      (-> collection-name utils/collection-name->filepath io/read-edn-file)))
 ```
 
 </details>
@@ -746,7 +746,7 @@
 (defn set-collection!
   [collection-name collection]
   (boolean (if (check/collection-writable? collection-name)
-               (let [filepath (helpers/collection-name->filepath collection-name)]
+               (let [filepath (utils/collection-name->filepath collection-name)]
                     (io/write-edn-file! filepath collection {:abc? true :create? true}))
                (println "edn-db.actions:" collection-name "collection is not writable!"))))
 ```

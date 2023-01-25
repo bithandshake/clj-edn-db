@@ -1,5 +1,5 @@
 
-(ns edn-db.helpers
+(ns edn-db.utils
     (:require [edn-db.config :as config]
               [string.api    :as string]))
 
