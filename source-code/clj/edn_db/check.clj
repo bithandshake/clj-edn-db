@@ -8,6 +8,8 @@
 ;; ----------------------------------------------------------------------------
 
 (defn max-filesize-reached?
+  ; @ignore
+  ;
   ; @param (string) collection-name
   ;
   ; @usage
@@ -18,6 +20,8 @@
   (-> collection-name utils/collection-name->filepath (io/max-filesize-reached? config/MAX-FILESIZE)))
 
 (defn collection-exists?
+  ; @ignore
+  ;
   ; @param (string) collection-name
   ;
   ; @usage
@@ -28,6 +32,8 @@
   (-> collection-name utils/collection-name->filepath io/file-exists?))
 
 (defn collection-writable?
+  ; @ignore
+  ;
   ; @param (string) collection-name
   ;
   ; @usage
@@ -38,6 +44,8 @@
   (-> collection-name max-filesize-reached? not))
 
 (defn collection-readable?
+  ; @ignore
+  ;
   ; @param (string) collection-name
   ;
   ; @usage
