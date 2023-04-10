@@ -59,7 +59,7 @@ You can track the changes of the <strong>clj-edn-db</strong> library [here](CHAN
 
 # Usage
 
-> The `edn-db.api` manages both namespaced and non namespaced documents and collections.
+> The `edn-db.api` manages both namespaced and non-namespaced documents and collections.
 
 ### How to add a document?
 
