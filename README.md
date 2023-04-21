@@ -25,6 +25,10 @@ The <strong>clj-edn-db</strong> functional documentation is [available here](doc
 
 You can track the changes of the <strong>clj-edn-db</strong> library [here](CHANGES.md).
 
+# Usage
+
+> The `edn-db.api` manages both namespaced and non-namespaced documents and collections.
+
 ### Index
 
 - [How to add a document?](#how-to-add-a-document)
@@ -56,10 +60,6 @@ You can track the changes of the <strong>clj-edn-db</strong> library [here](CHAN
 - [How to get a specific value from a document found by its ID?](#how-to-get-a-specific-value-from-a-document-found-by-its-id)
 
 - [How to check whether a document exists?](#how-to-check-whether-a-document-exists)
-
-# Usage
-
-> The `edn-db.api` manages both namespaced and non-namespaced documents and collections.
 
 ### How to add a document?
 
