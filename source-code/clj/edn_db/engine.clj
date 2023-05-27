@@ -55,9 +55,9 @@
   [document]
   (if (map/namespaced? document)
       (let [namespace (map/get-namespace document)]
-           (if (get    document (keyword/add-namespace namespace :id))
+           (if (get    document (keyword/add-namespace :id namespace))
                (return document)
-               (assoc  document (keyword/add-namespace namespace :id)
+               (assoc  document (keyword/add-namespace :id namespace)
                                 (random/generate-string))))
       (if (get    document :id)
           (return document)
@@ -229,7 +229,7 @@
   ; @return (map)
   [collection document-id]
   (if-let [namespace (collection->namespace collection)]
-          (get-document-kv collection (keyword/add-namespace namespace :id)
+          (get-document-kv collection (keyword/add-namespace :id namespace)
                            document-id)
           (get-document-kv collection :id document-id)))
 
