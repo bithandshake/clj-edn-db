@@ -143,7 +143,7 @@ function applies the given function on a document found by its ID.
 ### How to get all documents from a collection?
 
 The [`edn-db.api/get-collection`](documentation/clj/edn-db/API.md/#get-collection)
-function returns with the documents in a collection.
+function returns the documents in a collection.
 
 ```
 (get-collection "my_collection")
@@ -152,7 +152,7 @@ function returns with the documents in a collection.
 ### How to get a document from a collection found by its ID?
 
 The [`edn-db.api/get-document`](documentation/clj/edn-db/API.md/#get-document)
-function returns with a document from a collection found by its ID.
+function returns a document from a collection found by its ID.
 
 ```
 (get-document "my_collection" "my-document")
@@ -161,7 +161,7 @@ function returns with a document from a collection found by its ID.
 ### How to get more than one document from a collection found by their IDs?
 
 The [`edn-db.api/get-documents`](documentation/clj/edn-db/API.md/#get-documents)
-function returns with documents from a collection found by their IDs.
+function returns documents from a collection found by their IDs.
 
 ```
 (get-documents "my_collection" ["my-document" "your-document"])
@@ -170,7 +170,7 @@ function returns with documents from a collection found by their IDs.
 ### How to get documents from a collection filtered by a function?
 
 The [`edn-db.api/filter-documents`](documentation/clj/edn-db/API.md/#filter-documents)
-function returns with the documents in a collection filtered by the given function.
+function returns the documents in a collection filtered by the given function.
 
 ```
 (filter-documents "my_collection" (fn [%] (string? :my-string)))
@@ -179,7 +179,7 @@ function returns with the documents in a collection filtered by the given functi
 ### How to get the first document from a collection filtered by a function?
 
 The [`edn-db.api/filter-document`](documentation/clj/edn-db/API.md/#filter-document)
-function returns with the first document in a collection filtered by the given function.
+function returns the first document in a collection filtered by the given function.
 
 ```
 (filter-document "my_collection" (fn [%] (string? :my-string)))
@@ -188,7 +188,7 @@ function returns with the first document in a collection filtered by the given f
 ### How to get documents from a collection filtered by a query?
 
 The [`edn-db.api/match-documents`](documentation/clj/edn-db/API.md/#match-documents)
-function returns with the documents in a collection filtered by the given pattern.
+function returns the documents in a collection filtered by the given pattern.
 
 ```
 (match-documents "my_collection" {:my-string "My value"})
@@ -197,7 +197,7 @@ function returns with the documents in a collection filtered by the given patter
 ### How to get the first document from a collection filtered by a query?
 
 The [`edn-db.api/match-document`](documentation/clj/edn-db/API.md/#match-document)
-function returns with the first document in a collection filtered by the given pattern.
+function returns the first document in a collection filtered by the given pattern.
 
 ```
 (match-document "my_collection" {:my-string "My value"})
@@ -206,7 +206,7 @@ function returns with the first document in a collection filtered by the given p
 ### How to get documents from a collection filtered by a key/value pair?
 
 The [`edn-db.api/get-documents-kv`](documentation/clj/edn-db/API.md/#get-documents-kv)
-function returns with the documents in a collection filtered by the key/value pair.
+function returns the documents in a collection filtered by the key/value pair.
 
 ```
 (get-documents-kv "my_collection" :my-string "My value")
@@ -215,7 +215,7 @@ function returns with the documents in a collection filtered by the key/value pa
 ### How to get the first document from a collection filtered by a key/value pair?
 
 The [`edn-db.api/get-document-kv`](documentation/clj/edn-db/API.md/#get-document-kv)
-function returns with the first document in a collection filtered by the given key/value pair.
+function returns the first document in a collection filtered by the given key/value pair.
 
 ```
 (get-document-kv "my_collection" :my-string "My value")
@@ -224,7 +224,7 @@ function returns with the first document in a collection filtered by the given k
 ### How to get a specific value from a document found by its ID?
 
 The [`edn-db.api/get-document-item`](documentation/clj/edn-db/API.md/#get-document-item)
-function returns with a specific value in document found by its ID.
+function returns a specific value in document found by its ID.
 
 ```
 (get-document-item "my_collection" "my-document" :my-string)
