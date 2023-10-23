@@ -2,7 +2,6 @@
 (ns edn-db.engine
     (:require [keyword.api :as keyword]
               [map.api     :as map]
-              [noop.api    :refer [return]]
               [random.api  :as random]
               [time.api    :as time]
               [vector.api  :as vector]))
@@ -55,13 +54,13 @@
   [document]
   (if (map/namespaced? document)
       (let [namespace (map/get-namespace document)]
-           (if (get    document (keyword/add-namespace :id namespace))
-               (return document)
-               (assoc  document (keyword/add-namespace :id namespace)
-                                (random/generate-string))))
-      (if (get    document :id)
-          (return document)
-          (assoc  document :id (random/generate-string)))))
+           (if (get   document (keyword/add-namespace :id namespace))
+               (->    document)
+               (assoc document (keyword/add-namespace :id namespace)
+                               (random/generate-string))))
+      (if (get   document :id)
+          (->    document)
+          (assoc document :id (random/generate-string)))))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -110,7 +109,7 @@
   (letfn [(f [result document]
              (if-not (filter-f document)
                      ; If document is NOT matches ...
-                     (return result)
+                     (-> result)
                      ; If document is matches ...
                      (conj result document)))]
          (reduce f [] collection)))
@@ -147,7 +146,7 @@
   (letfn [(f [result document]
              (if-not (map/match-pattern? document pattern)
                      ; If document is NOT matches ...
-                     (return result)
+                     (-> result)
                      ; If document is matches ...
                      (conj result document)))]
          (reduce f [] collection)))
@@ -190,7 +189,7 @@
   (letfn [(f [result document]
              (if-not (= item-value (get document item-key))
                      ; If document is NOT matches ...
-                     (return result)
+                     (-> result)
                      ; If document is matches ...
                      (conj result document)))]
          (reduce f [] collection)))
@@ -266,7 +265,7 @@
   (letfn [(f [result document]
              (if-not (vector/contains-item? document-ids (:id document))
                      ; If result is NOT matches ...
-                     (return result)
+                     (-> result)
                      ; If document is matches ...
                      (conj result document)))]
          (reduce f [] collection)))
@@ -319,8 +318,8 @@
   [collection document-id]
   (letfn [(f [result document]
              (if (= document-id (map/get-ns document :id))
-                 (return result)
-                 (conj   result document)))]
+                 (->   result)
+                 (conj result document)))]
          (reduce f [] collection)))
 
 (defn remove-documents
@@ -338,8 +337,8 @@
   [collection document-ids]
   (letfn [(f [result document]
              (if (vector/contains-item? document-ids (map/get-ns document :id))
-                 (return result)
-                 (conj   result document)))]
+                 (->   result)
+                 (conj result document)))]
          (reduce f [] collection)))
 
 (defn apply-on-document

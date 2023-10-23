@@ -72,7 +72,7 @@
   [collection-name document]
   (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (engine/add-document collection document))
-       (return document)))
+       (-> document)))
 ```
 
 </details>
@@ -130,7 +130,7 @@
   [collection-name document-id f & params]
   (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (engine/apply-on-document collection document-id f params))
-       (return document-id)))
+       (-> document-id)))
 ```
 
 </details>
@@ -654,7 +654,7 @@
   [collection-name document-id]
   (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (engine/remove-document collection document-id))
-       (return document-id)))
+       (-> document-id)))
 ```
 
 </details>
@@ -704,7 +704,7 @@
   [collection-name document-ids]
   (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (engine/remove-documents collection document-ids))
-       (return document-ids)))
+       (-> document-ids)))
 ```
 
 </details>
@@ -800,7 +800,7 @@
   (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (-> collection (engine/remove-document document-id)
                                                        (engine/add-document    document)))
-       (return document-id)))
+       (-> document-id)))
 ```
 
 </details>

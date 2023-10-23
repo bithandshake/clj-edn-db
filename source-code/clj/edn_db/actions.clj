@@ -4,8 +4,7 @@
               [edn-db.engine :as engine]
               [edn-db.reader :as reader]
               [edn-db.utils  :as utils]
-              [io.api        :as io]
-              [noop.api      :refer [return]]))
+              [io.api        :as io]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -45,7 +44,7 @@
   [collection-name document]
   (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (engine/add-document collection document))
-       (return document)))
+       (-> document)))
 
 (defn remove-documents!
   ; @param (string) collection-name
@@ -63,7 +62,7 @@
   [collection-name document-ids]
   (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (engine/remove-documents collection document-ids))
-       (return document-ids)))
+       (-> document-ids)))
 
 (defn remove-document!
   ; @param (string) collection-name
@@ -81,7 +80,7 @@
   [collection-name document-id]
   (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (engine/remove-document collection document-id))
-       (return document-id)))
+       (-> document-id)))
 
 (defn set-document!
   ; @param (string) collection-name
@@ -101,7 +100,7 @@
   (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (-> collection (engine/remove-document document-id)
                                                        (engine/add-document    document)))
-       (return document-id)))
+       (-> document-id)))
 
 (defn apply-on-document!
   ; @param (string) collection-name
@@ -125,4 +124,4 @@
   [collection-name document-id f & params]
   (let [collection (reader/get-collection collection-name)]
        (set-collection! collection-name (engine/apply-on-document collection document-id f params))
-       (return document-id)))
+       (-> document-id)))
