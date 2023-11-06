@@ -1,5 +1,9 @@
 
-# edn-db.api Clojure namespace
+### edn-db.api
+
+Functional documentation of the edn-db.api Clojure namespace
+
+---
 
 ##### [README](../../../README.md) > [DOCUMENTATION](../../COVER.md) > edn-db.api
 
@@ -38,6 +42,8 @@
 - [set-collection!](#set-collection)
 
 - [set-document!](#set-document)
+
+---
 
 ### add-document!
 
@@ -819,5 +825,5 @@
 
 ---
 
-This documentation is generated with the [clj-docs-generator](https://github.com/bithandshake/clj-docs-generator) engine.
+<sub>This documentation is generated with the [clj-docs-generator](https://github.com/bithandshake/clj-docs-generator) engine.</sub>
 

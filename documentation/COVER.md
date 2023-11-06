@@ -1,7 +1,11 @@
 
-# clj-edn-db documentation
+### clj-edn-db
 
-Documentation of the [clj-edn-db](https://github.com/bithandshake/clj-edn-db) Clojure library
+Functional documentation of the [clj-edn-db](https://github.com/bithandshake/clj-edn-db) Clojure library
+
+---
+
+
 
 ##### [README](../README.md) > DOCUMENTATION
 
@@ -11,5 +15,5 @@ Documentation of the [clj-edn-db](https://github.com/bithandshake/clj-edn-db) Cl
 
 ---
 
-This documentation is generated with the [clj-docs-generator](https://github.com/bithandshake/clj-docs-generator) engine.
+<sub>This documentation is generated with the [clj-docs-generator](https://github.com/bithandshake/clj-docs-generator) engine.</sub>
 
