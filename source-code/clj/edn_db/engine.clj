@@ -293,8 +293,8 @@
   ;
   ; @return (maps in vector)
   [collection document]
-  (let [document (document<-document-id  document)
-        document (time/unparse-date-time document)]
+  (let [document (document<-document-id   document)
+        document (time/unparse-timestamps document)]
        (if (empty? collection)
            (vector/conj-item collection document)
            (if-let [namespace (collection->namespace collection)]
@@ -362,7 +362,7 @@
   (let [document         (get-document collection document-id)
         params           (cons document params)
         updated-document (apply f params)
-        updated-document (time/unparse-date-time updated-document)]
+        updated-document (time/unparse-timestamps updated-document)]
        (-> collection (remove-document document-id)
                       (add-document    updated-document))))
 
