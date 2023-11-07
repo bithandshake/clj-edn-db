@@ -3,8 +3,7 @@
 
 ### Overview
 
-The <strong>clj-edn-db</strong> is a lightweight Clojure collection/document
-database stored in EDN files.
+The <strong>clj-edn-db</strong> is a lightweight Clojure collection/document database stored in EDN files.
 
 ### deps.edn
 
@@ -26,6 +25,9 @@ The <strong>clj-edn-db</strong> functional documentation is [available here](doc
 You can track the changes of the <strong>clj-edn-db</strong> library [here](CHANGES.md).
 
 # Usage
+
+> Some parameters of the following functions and some further functions are not discussed in this file.
+  To learn more about the available functionality, check out the [functional documentation](documentation/COVER.md)!
 
 > The `edn-db.api` manages both namespaced and non-namespaced documents and collections.
 
