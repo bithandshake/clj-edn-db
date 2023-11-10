@@ -20,7 +20,7 @@
   ; @return (keyword)
   [collection]
   (if-let [first-document (first collection)]
-          (map/get-namespace first-document)))
+          (map/namespace first-document)))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -53,7 +53,7 @@
   ; @return (map)
   [document]
   (if (map/namespaced? document)
-      (let [namespace (map/get-namespace document)]
+      (let [namespace (map/namespace document)]
            (if (get   document (keyword/add-namespace :id namespace))
                (->    document)
                (assoc document (keyword/add-namespace :id namespace)
@@ -144,7 +144,7 @@
   ; @return (maps in vector)
   [collection pattern]
   (letfn [(f [result document]
-             (if-not (map/match-pattern? document pattern)
+             (if-not (map/matches-pattern? document pattern)
                      ; If document is NOT matches ...
                      (-> result)
                      ; If document is matches ...
@@ -167,7 +167,7 @@
   ;
   ; @return (map)
   [collection pattern]
-  (vector/first-filtered collection #(map/match-pattern? % pattern)))
+  (vector/first-filtered collection #(map/matches-pattern? % pattern)))
 
 (defn get-documents-kv
   ; @ignore
