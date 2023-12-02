@@ -102,7 +102,7 @@
   ; @param (function) filter-f
   ;
   ; @usage
-  ; (filter-documents [{...} {...} {...}] #(= :value (:key %1)))
+  ; (filter-documents [{...} {...} {...}] #(= :value (:key %)))
   ;
   ; @return (maps in vector)
   [collection filter-f]
@@ -121,11 +121,11 @@
   ; @param (function) filter-f
   ;
   ; @usage
-  ; (filter-document [{...} {...} {...}] #(= :value (:key %1)))
+  ; (filter-document [{...} {...} {...}] #(= :value (:key %)))
   ;
   ; @return (map)
   [collection filter-f]
-  (vector/first-filtered collection filter-f))
+  (vector/first-match collection filter-f))
 
 (defn match-documents
   ; @ignore
@@ -167,7 +167,7 @@
   ;
   ; @return (map)
   [collection pattern]
-  (vector/first-filtered collection #(map/matches-pattern? % pattern)))
+  (vector/first-match collection #(map/matches-pattern? % pattern)))
 
 (defn get-documents-kv
   ; @ignore
@@ -211,7 +211,7 @@
   ;
   ; @return (map)
   [collection item-key item-value]
-  (vector/first-filtered collection #(= item-value (get % item-key))))
+  (vector/first-match collection #(= item-value (get % item-key))))
 
 (defn get-document
   ; @ignore
