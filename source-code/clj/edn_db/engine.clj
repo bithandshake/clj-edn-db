@@ -106,13 +106,13 @@
   ;
   ; @return (maps in vector)
   [collection filter-f]
-  (letfn [(f [result document]
-             (if-not (filter-f document)
-                     ; If document is NOT matches ...
-                     (-> result)
-                     ; If document is matches ...
-                     (conj result document)))]
-         (reduce f [] collection)))
+  (letfn [(f0 [result document]
+              (if-not (filter-f document)
+                      ; If document is NOT matches ...
+                      (-> result)
+                      ; If document is matches ...
+                      (conj result document)))]
+         (reduce f0 [] collection)))
 
 (defn filter-document
   ; @ignore
@@ -143,13 +143,13 @@
   ;
   ; @return (maps in vector)
   [collection pattern]
-  (letfn [(f [result document]
-             (if-not (map/matches-pattern? document pattern)
-                     ; If document is NOT matches ...
-                     (-> result)
-                     ; If document is matches ...
-                     (conj result document)))]
-         (reduce f [] collection)))
+  (letfn [(f0 [result document]
+              (if-not (map/matches-pattern? document pattern)
+                      ; If document is NOT matches ...
+                      (-> result)
+                      ; If document is matches ...
+                      (conj result document)))]
+         (reduce f0 [] collection)))
 
 (defn match-document
   ; @ignore
@@ -186,13 +186,13 @@
   ;
   ; @return (maps in vector)
   [collection item-key item-value]
-  (letfn [(f [result document]
-             (if-not (= item-value (get document item-key))
-                     ; If document is NOT matches ...
-                     (-> result)
-                     ; If document is matches ...
-                     (conj result document)))]
-         (reduce f [] collection)))
+  (letfn [(f0 [result document]
+              (if-not (= item-value (get document item-key))
+                      ; If document is NOT matches ...
+                      (-> result)
+                      ; If document is matches ...
+                      (conj result document)))]
+         (reduce f0 [] collection)))
 
 (defn get-document-kv
   ; @ignore
@@ -262,13 +262,13 @@
   ;
   ; @return (maps in vector)
   [collection document-ids]
-  (letfn [(f [result document]
-             (if-not (vector/contains-item? document-ids (:id document))
-                     ; If result is NOT matches ...
-                     (-> result)
-                     ; If document is matches ...
-                     (conj result document)))]
-         (reduce f [] collection)))
+  (letfn [(f0 [result document]
+              (if-not (vector/contains-item? document-ids (:id document))
+                      ; If result is NOT matches ...
+                      (-> result)
+                      ; If document is matches ...
+                      (conj result document)))]
+         (reduce f0 [] collection)))
 
 (defn add-document
   ; @ignore
@@ -316,11 +316,11 @@
   ;
   ; @return (maps in vector)
   [collection document-id]
-  (letfn [(f [result document]
-             (if (= document-id (map/get-ns document :id))
-                 (->   result)
-                 (conj result document)))]
-         (reduce f [] collection)))
+  (letfn [(f0 [result document]
+              (if (= document-id (map/get-ns document :id))
+                  (->   result)
+                  (conj result document)))]
+         (reduce f0 [] collection)))
 
 (defn remove-documents
   ; @ignore
@@ -335,11 +335,11 @@
   ;
   ; @return (maps in vector)
   [collection document-ids]
-  (letfn [(f [result document]
-             (if (vector/contains-item? document-ids (map/get-ns document :id))
-                 (->   result)
-                 (conj result document)))]
-         (reduce f [] collection)))
+  (letfn [(f0 [result document]
+              (if (vector/contains-item? document-ids (map/get-ns document :id))
+                  (->   result)
+                  (conj result document)))]
+         (reduce f0 [] collection)))
 
 (defn apply-on-document
   ; @ignore
