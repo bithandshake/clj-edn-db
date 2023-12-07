@@ -1,10 +1,10 @@
 
 (ns edn-db.engine
-    (:require [keyword.api :as keyword]
-              [map.api     :as map]
-              [random.api  :as random]
-              [time.api    :as time]
-              [vector.api  :as vector]))
+    (:require [fruits.keyword.api :as keyword]
+              [fruits.map.api     :as map]
+              [fruits.random.api  :as random]
+              [fruits.vector.api  :as vector]
+              [time.api           :as time]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 
 (ns edn-db.utils
-    (:require [edn-db.config :as config]
-              [string.api    :as string]))
+    (:require [edn-db.config     :as config]
+              [fruits.string.api :as string]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
