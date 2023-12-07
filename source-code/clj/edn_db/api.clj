@@ -6,7 +6,7 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-; edn-db.actions
+; @redirect (edn-db.actions)
 (def set-collection!    actions/set-collection!)
 (def add-document!      actions/add-document!)
 (def remove-documents!  actions/remove-documents!)
@@ -14,7 +14,7 @@
 (def set-document!      actions/set-document!)
 (def apply-on-document! actions/apply-on-document!)
 
-; edn-db.reader
+; @redirect (edn-db.reader)
 (def get-collection    reader/get-collection)
 (def filter-documents  reader/filter-documents)
 (def filter-document   reader/filter-document)
