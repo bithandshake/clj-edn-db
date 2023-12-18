@@ -9,7 +9,7 @@ The <strong>clj-edn-db</strong> is a lightweight Clojure collection/document dat
 
 ```
 {:deps {bithandshake/clj-edn-db {:git/url "https://github.com/bithandshake/clj-edn-db"
-                                 :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
+                                 :sha     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}}
 ```
 
 ### Current version
