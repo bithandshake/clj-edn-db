@@ -3,7 +3,7 @@
 
 ### Overview
 
-The <strong>clj-edn-db</strong> is a lightweight Clojure collection/document database stored in EDN files.
+The <strong>clj-edn-db</strong> is a simple EDN database for Clojure projects.
 
 ### deps.edn
 
