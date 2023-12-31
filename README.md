@@ -122,7 +122,7 @@ The [`edn-db.api/remove-documents!`](documentation/clj/edn-db/API.md/#remove-doc
 function removes multiple documents from a collection found by their IDs.
 
 ```
-(remove-documents! "my_collection" ["my-document" "your-document"])
+(remove-documents! "my_collection" ["my-document" "another-document"])
 ```
 
 ### How to apply a function on a document?
@@ -166,7 +166,7 @@ The [`edn-db.api/get-documents`](documentation/clj/edn-db/API.md/#get-documents)
 function returns documents from a collection found by their IDs.
 
 ```
-(get-documents "my_collection" ["my-document" "your-document"])
+(get-documents "my_collection" ["my-document" "another-document"])
 ```
 
 ### How to get documents from a collection filtered by a function?

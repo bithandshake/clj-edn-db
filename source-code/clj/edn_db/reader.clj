@@ -111,7 +111,7 @@
   ; @param (strings in vector) document-ids
   ;
   ; @usage
-  ; (get-documents "my_collection" ["my-document" "your-document"])
+  ; (get-documents "my_collection" ["my-document" "another-document"])
   ;
   ; @return (maps in vector)
   [collection-name document-ids]
