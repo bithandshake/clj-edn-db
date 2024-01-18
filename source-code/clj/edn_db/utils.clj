@@ -16,7 +16,7 @@
   ;
   ; @return (boolean)
   [collection-name]
-  (string/nonempty? collection-name))
+  (string/not-empty? collection-name))
 
 (defn collection-name->filepath
   ; @ignore
