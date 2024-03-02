@@ -9,148 +9,108 @@
 ;; ----------------------------------------------------------------------------
 
 (defn get-collection
+  ; @description
+  ; Returns the documents of a specific collection.
+  ;
   ; @param (string) collection-name
   ;
   ; @example
-  ; (get-collection "my_collection")
+  ; (get-collection "my-collection")
   ; =>
-  ; [{...} {...} {...}]
+  ; [{:id "my-document" ...} {...} {...}]
   ;
-  ; @return (vector)
+  ; @return (maps in vector)
   [collection-name]
-  (if (check/collection-exists? collection-name)
+  (if (check/collection-exists? collection-name {:warn? true})
       (-> collection-name utils/collection-name->filepath io/read-edn-file)))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
 (defn filter-documents
+  ; @description
+  ; Returns the documents of a specific collection, filtered with the given 'filter-f' function.
+  ;
   ; @param (string) collection-name
   ; @param (function) filter-f
   ;
   ; @usage
-  ; (filter-documents "my_collection" #(= :value (:key %1)))
+  ; (filter-documents "my-collection" :my-key)
+  ; =>
+  ; [{:id "my-document" :my-key "My value" ...} {:id "another-document" :my-key "Another value" ...}]
   ;
   ; @return (maps in vector)
   [collection-name filter-f]
-  (let [collection (get-collection collection-name)]
-       (engine/filter-documents collection filter-f)))
+  (if-let [collection (get-collection collection-name)]
+          (engine/filter-documents collection filter-f)))
 
 (defn filter-document
+  ; @description
+  ; Returns the first document of a specific collection that matches the given 'filter-f' function.
+  ;
   ; @param (string) collection-name
   ; @param (function) filter-f
   ;
   ; @usage
-  ; (filter-document "my_collection" #(= :value (:key %1)))
+  ; (filter-document "my-collection" :my-key)
+  ; =>
+  ; {:id "my-document" :my-key "My value" ...}
   ;
   ; @return (map)
   [collection-name filter-f]
-  (let [collection (get-collection collection-name)]
-       (engine/filter-document collection filter-f)))
+  (if-let [collection (get-collection collection-name)]
+          (engine/filter-document collection filter-f)))
 
-(defn match-documents
-  ; @param (string) collection-name
-  ; @param (map) pattern
-  ;
-  ; @example
-  ; (match-documents "my_collection" {:foo "bar"})
-  ; =>
-  ; [{:foo "bar" :baz "boo"}]
-  ;
-  ; @return (maps in vector)
-  [collection-name pattern]
-  (let [collection (get-collection collection-name)]
-       (engine/match-documents collection pattern)))
-
-(defn match-document
-  ; @param (string) collection-name
-  ; @param (keyword) pattern
-  ;
-  ; @example
-  ; (match-document "my_collection" {:foo "bar"})
-  ; =>
-  ; {:foo "bar" :baz "boo"}
-  ;
-  ; @return (map)
-  [collection-name pattern]
-  (let [collection (get-collection collection-name)]
-       (engine/match-document collection pattern)))
-
-(defn get-documents-kv
-  ; @param (string) collection-name
-  ; @param (keyword) item-key
-  ; @param (*) item-value
-  ;
-  ; @example
-  ; (get-documents-kv "my_collection" :foo "bar")
-  ; =>
-  ; [{:foo "bar"} {:foo "bar"}]
-  ;
-  ; @return (maps in vector)
-  [collection-name item-key item-value]
-  (let [collection (get-collection collection-name)]
-       (engine/get-documents-kv collection item-key item-value)))
-
-(defn get-document-kv
-  ; @param (string) collection-name
-  ; @param (keyword) item-key
-  ; @param (*) item-value
-  ;
-  ; @example
-  ; (get-document-kv "my_collection" :foo "bar")
-  ; =>
-  ; {:foo "bar"}
-  ;
-  ; @return (map)
-  [collection-name item-key item-value]
-  (let [collection (get-collection collection-name)]
-       (engine/get-document-kv collection item-key item-value)))
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (defn get-documents
+  ; @description
+  ; Returns specific documents (identified by their document ID) from a specific collection.
+  ;
   ; @param (string) collection-name
   ; @param (strings in vector) document-ids
   ;
   ; @usage
-  ; (get-documents "my_collection" ["my-document" "another-document"])
+  ; (get-documents "my-collection" ["my-document" "another-document"])
+  ; =>
+  ; [{:id "my-document" ...} {:id "another-document"}]
   ;
   ; @return (maps in vector)
   [collection-name document-ids]
-  (let [collection (get-collection collection-name)]
-       (engine/get-documents collection document-ids)))
+  (if-let [collection (get-collection collection-name)]
+          (engine/get-documents collection document-ids)))
 
 (defn get-document
+  ; @description
+  ; Returns a specific document (identified by its document ID) from a specific collection.
+  ;
   ; @param (string) collection-name
   ; @param (string) document-id
   ;
   ; @usage
-  ; (get-document "my_collection" "my-document")
+  ; (get-document "my-collection" "my-document")
+  ; =>
+  ; {:id "my-collection"}
   ;
   ; @return (map)
   [collection-name document-id]
-  (let [collection (get-collection collection-name)]
-       (engine/get-document collection document-id)))
-
-(defn get-document-item
-  ; @param (string) collection-name
-  ; @param (string) document-id
-  ; @param (keyword) item-key
-  ;
-  ; @usage
-  ; (get-document-item "my_collection" "my-document" :my-item)
-  ;
-  ; @return (*)
-  [collection-name document-id item-key]
-  (let [collection (get-collection collection-name)]
-       (engine/get-document-item collection document-id item-key)))
+  (if-let [collection (get-collection collection-name)]
+          (engine/get-document collection document-id)))
 
 (defn document-exists?
+  ; @description
+  ; Returns TRUE if the document exists with the given document ID.
+  ;
   ; @param (string) collection-name
   ; @param (string) document-id
   ;
   ; @usage
-  ; (document-exists? "my_collection" "my-document")
+  ; (document-exists? "my-collection" "my-document")
+  ; =>
+  ; true
   ;
   ; @return (boolean)
   [collection-name document-id]
-  (let [collection (get-collection collection-name)]
-       (engine/document-exists? collection document-id)))
+  (if-let [collection (get-collection collection-name)]
+          (engine/document-exists? collection document-id)))

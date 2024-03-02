@@ -3,8 +3,7 @@
     (:require [fruits.keyword.api :as keyword]
               [fruits.map.api     :as map]
               [fruits.random.api  :as random]
-              [fruits.vector.api  :as vector]
-              [time.api           :as time]))
+              [fruits.vector.api  :as vector]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -12,10 +11,15 @@
 (defn collection->namespace
   ; @ignore
   ;
+  ; @description
+  ; Returns the document namespace derived from the first document of the given collection.
+  ;
   ; @param (maps in vector) collection
   ;
   ; @usage
-  ; (collection->namespace [{...} {...} {...}])
+  ; (collection->namespace [{:my-namespace/id "my-document" ...} {...} {...}])
+  ; =>
+  ; :my-namespace
   ;
   ; @return (keyword)
   [collection]
@@ -28,27 +32,38 @@
 (defn document<-document-id
   ; @ignore
   ;
+  ; @description
+  ; Ensures that the given document contains a document ID.
+  ;
   ; @param (map) document
   ;
   ; @example
-  ; (document<-document-id {:bar "baz" :id "my-document"})
+  ; (document<-document-id {:my-key "My value" :id "my-document" ...})
   ; =>
-  ; {:bar "baz" :id "my-document"}
+  ; {:my-key "My value"
+  ;  :id     "my-document"
+  ;  ...}
   ;
   ; @example
-  ; (document<-document-id {:foo/bar "baz" :foo/id "my-document"})
+  ; (document<-document-id {:my-namespace/my-value "My value" :my-namespace/id "my-document" ...})
   ; =>
-  ; {:foo/bar "baz" :foo/id "my-document"}
+  ; {:my-namespace/my-value "My value"
+  ;  :my-namespace/id       "my-document"
+  ;  ...}
   ;
   ; @example
-  ; (document<-document-id {:bar "baz"})
+  ; (document<-document-id {:my-key "My value" ...})
   ; =>
-  ; {:bar "baz" :id "0ce14671-e916-43ab-b057-0939329d4c1b"}
+  ; {:my-key "My value"
+  ;  :id     "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  ;  ...}
   ;
   ; @example
-  ; (document<-document-id {:foo/bar "baz"})
+  ; (document<-document-id {:my-namespace/my-value "My value" ...})
   ; =>
-  ; {:foo/bar "baz" :foo/id "0ce14671-e916-43ab-b057-0939329d4c1b"}
+  ; {:my-namespace/my-value "My value"
+  ;  :my-namespace/id       "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  ;  ...}
   ;
   ; @return (map)
   [document]
@@ -65,200 +80,58 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn trim-collection
-  ; @ignore
-  ;
-  ; @param (maps in vector) collection
-  ; @param (integer) max-count
-  ; @param (integer)(opt) skip
-  ; Default: 0
-  ;
-  ; @example
-  ; (trim-collection [{:id "1"} {:id "2"} {:id "3"} {:id "4"} {:id "5"}] 2)
-  ; =>
-  ; [{:id "1"} {:id "2"}]
-  ;
-  ; @example
-  ; (trim-collection [{:id "1"} {:id "2"} {:id "3"} {:id "4"} {:id "5"}] 2 1)
-  ; =>
-  ; [{:id "2"} {:id "3"} {:id "4"}]
-  ;
-  ; @example
-  ; (trim-collection [{:id "1"} {:id "2"} {:id "3"} {:id "4"} {:id "5"}] 2 4)
-  ; =>
-  ; [{:id "5"}]
-  ;
-  ; @return (maps in vector)
-  ([collection max-count]
-   (trim-collection collection max-count 0))
-
-  ([collection max-count skip]
-   (take max-count (drop skip collection))))
-
 (defn filter-documents
   ; @ignore
+  ;
+  ; @description
+  ; Returns the documents of the given collection, filtered with the given 'filter-f' function.
   ;
   ; @param (maps in vector) collection
   ; @param (function) filter-f
   ;
   ; @usage
-  ; (filter-documents [{...} {...} {...}] #(= :value (:key %)))
+  ; (filter-documents [{:id "my-document" :my-key "My value" ...} {:id "another-document" :my-key "Another value" ...} {...} {...}] :my-key)
+  ; =>
+  ; [{:id "my-document" :my-key "My value" ...} {:id "another-document" :my-key "Another value" ...}]
   ;
   ; @return (maps in vector)
   [collection filter-f]
-  (letfn [(f0 [result document]
-              (if-not (filter-f document)
-                      ; If document is NOT matches ...
-                      (-> result)
-                      ; If document is matches ...
-                      (conj result document)))]
-         (reduce f0 [] collection)))
+  (vector/all-matches collection filter-f))
 
 (defn filter-document
   ; @ignore
   ;
+  ; @description
+  ; Returns the first document of the given collection that matches the the given 'filter-f' function.
+  ;
   ; @param (maps in vector) collection
   ; @param (function) filter-f
   ;
   ; @usage
-  ; (filter-document [{...} {...} {...}] #(= :value (:key %)))
+  ; (filter-document [{:id "my-document" :my-key "My value" ...} {:id "another-document" :my-key "Another value" ...} {...} {...}] :my-key)
+  ; =>
+  ; {:id "my-document" :my-key "My value" ...}
   ;
   ; @return (map)
   [collection filter-f]
   (vector/first-match collection filter-f))
 
-(defn match-documents
-  ; @ignore
-  ;
-  ; @description
-  ; Returns documents found by the given pattern
-  ;
-  ; @param (maps in vector) collection
-  ; @param (map) pattern
-  ;
-  ; @example
-  ; (match-documents [{:foo "bar"} {...} {:foo "bar"}] {:foo "bar"})
-  ; =>
-  ; [{:foo "bar"} {:foo "bar"}]
-  ;
-  ; @return (maps in vector)
-  [collection pattern]
-  (letfn [(f0 [result document]
-              (if-not (map/matches-pattern? document pattern)
-                      ; If document is NOT matches ...
-                      (-> result)
-                      ; If document is matches ...
-                      (conj result document)))]
-         (reduce f0 [] collection)))
-
-(defn match-document
-  ; @ignore
-  ;
-  ; @description
-  ; Returns the first document found by the given pattern
-  ;
-  ; @param (maps in vector) collection
-  ; @param (map) pattern
-  ;
-  ; @example
-  ; (match-document [{:foo "bar"} {...} {:foo "bar"}] {:foo "bar"})
-  ; =>
-  ; {:foo "bar"}
-  ;
-  ; @return (map)
-  [collection pattern]
-  (vector/first-match collection #(map/matches-pattern? % pattern)))
-
-(defn get-documents-kv
-  ; @ignore
-  ;
-  ; @description
-  ; Returns documents found by the given value
-  ;
-  ; @param (maps in vector) collection
-  ; @param (keyword) item-key
-  ; @param (*) item-value
-  ;
-  ; @example
-  ; (get-documents-kv [{:foo "bar"} {...} {:foo "bar"}] :foo "bar")
-  ; =>
-  ; [{:foo "bar"} {:foo "bar"}]
-  ;
-  ; @return (maps in vector)
-  [collection item-key item-value]
-  (letfn [(f0 [result document]
-              (if-not (= item-value (get document item-key))
-                      ; If document is NOT matches ...
-                      (-> result)
-                      ; If document is matches ...
-                      (conj result document)))]
-         (reduce f0 [] collection)))
-
-(defn get-document-kv
-  ; @ignore
-  ;
-  ; @description
-  ; Returns the first document found by the given value
-  ;
-  ; @param (maps in vector) collection
-  ; @param (keyword) item-key
-  ; @param (*) item-value
-  ;
-  ; @example
-  ; (get-document-kv [{...} {...} {:foo "bar"}] :foo "bar")
-  ; =>
-  ; {:foo "bar"}
-  ;
-  ; @return (map)
-  [collection item-key item-value]
-  (vector/first-match collection #(= item-value (get % item-key))))
-
-(defn get-document
-  ; @ignore
-  ;
-  ; @description
-  ; Returns (first) document found by the given ID
-  ;
-  ; @param (maps in vector) collection
-  ; @param (string) document-id
-  ;
-  ; @usage
-  ; (get-document [{...} {...} {...}] "my-document")
-  ;
-  ; @return (map)
-  [collection document-id]
-  (if-let [namespace (collection->namespace collection)]
-          (get-document-kv collection (keyword/add-namespace :id namespace)
-                           document-id)
-          (get-document-kv collection :id document-id)))
-
-(defn get-document-item
-  ; @ignore
-  ;
-  ; @param (maps in vector) collection
-  ; @param (string) document-id
-  ; @param (keyword) item-key
-  ;
-  ; @example
-  ; (get-document-item [{:id "my-document" :label "My document"} {...} {...}]
-  ;                    "my-document"
-  ;                    :label)
-  ; =>
-  ; "My document"
-  ;
-  ; @return (*)
-  [collection document-id item-key]
-  (let [document (get-document collection document-id)]
-       (get document item-key)))
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (defn get-documents
   ; @ignore
+  ;
+  ; @description
+  ; Returns specific documents (identified by their document ID) from the given collection.
   ;
   ; @param (maps in vector) collection
   ; @param (strings in vector) document-ids
   ;
   ; @usage
-  ; (get-documents [{...} {...}] ["my-document" ...])
+  ; (get-documents [{:id "my-document" ...} {:id "another-document" ...} {...} {...}] ["my-document" "another-document"])
+  ; =>
+  ; [{:id "my-document" ...} {:id "another-document" ...} {...} {...}]
   ;
   ; @return (maps in vector)
   [collection document-ids]
@@ -270,31 +143,78 @@
                       (conj result document)))]
          (reduce f0 [] collection)))
 
-(defn add-document
+(defn get-document
   ; @ignore
+  ;
+  ; @description
+  ; Returns a specific document (identified by its document ID) from the given collection.
+  ;
+  ; @param (maps in vector) collection
+  ; @param (string) document-id
+  ;
+  ; @usage
+  ; (get-document [{:id "my-document" ...} {...} {...}] "my-document")
+  ; =>
+  ; {:id "my-document" ...}
+  ;
+  ; @return (map)
+  [collection document-id]
+  (if-let [namespace (collection->namespace collection)]
+          (get-document-kv collection (keyword/add-namespace :id namespace)
+                           document-id)
+          (get-document-kv collection :id document-id)))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn document-exists?
+  ; @ignore
+  ;
+  ; @description
+  ; Returns TRUE if the document exists with the given document ID in the given collection.
+  ;
+  ; @param (maps in vector) collection
+  ; @param (string) document-id
+  ;
+  ; @usage
+  ; (document-exists? [{:id "my-document" ...} {...}] "my-document")
+  ; =>
+  ; true
+  ;
+  ; @return (boolean)
+  [collection document-id]
+  (boolean (get-document collection document-id)))
+
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
+(defn insert-document
+  ; @ignore
+  ;
+  ; @description
+  ; Inserts the given document to the end of the given collection.
   ;
   ; @param (maps in vector) collection
   ; @param (keyword) document
   ;
   ; @example
-  ; (add-document [{:foo "bar"}] {:baz "boo"})
+  ; (insert-document [{:id "my-document"}] {:id "another-document"})
   ; =>
-  ; [{:foo "bar"} {:baz "boo"}]
+  ; [{:id "my-document"} {:id "another-document"}]
   ;
   ; @example
-  ; (add-document [{:foo "bar"}] {:bam/baz "boo"})
+  ; (insert-document [{:id "my-document"}] {:my-namespace/id "another-document"})
   ; =>
-  ; [{:foo "bar"} {:baz "boo"}]
+  ; [{:id "my-document"} {:id "another-document"}]
   ;
   ; @example
-  ; (add-document [{:bam/foo "bar"}] {:baz "boo"})
+  ; (insert-document [{:my-namespace/id "my-document"}] {:id "another-document"})
   ; =>
-  ; [{:bam/foo "bar"} {:bam/baz "boo"}]
+  ; [{:my-namespace/id "my-document"} {:my-namespace/id "another-document"}]
   ;
   ; @return (maps in vector)
   [collection document]
-  (let [document (document<-document-id   document)
-        document (time/unparse-timestamps document)]
+  (let [document (document<-document-id document)]
        (if (empty? collection)
            (vector/conj-item collection document)
            (if-let [namespace (collection->namespace collection)]
@@ -303,46 +223,36 @@
                    (let [document (map/remove-namespace document)]
                         (vector/conj-item collection document))))))
 
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
+
 (defn remove-document
   ; @ignore
+  ;
+  ; @description
+  ; Removes a document (identified by its document ID) from the given collection.
   ;
   ; @param (maps in vector) collection
   ; @param (string) document-id
   ;
   ; @example
-  ; (remove-document [{:id "1"} {:id "2"}] "2")
+  ; (remove-document [{:id "my-document" ...} {:id "another-document" ...}] "my-document")
   ; =>
-  ; [{:id "1"}]
+  ; [{:id "another-document" ...}]
   ;
   ; @return (maps in vector)
   [collection document-id]
-  (letfn [(f0 [result document]
-              (if (= document-id (map/get-ns document :id))
-                  (->   result)
-                  (conj result document)))]
-         (reduce f0 [] collection)))
+  (letfn [(f0 [%] (= document-id (map/get-ns % :id)))]
+         (vector/remove-items collection f0)))
 
-(defn remove-documents
-  ; @ignore
-  ;
-  ; @param (maps in vector) collection
-  ; @param (strings in vector) document-ids
-  ;
-  ; @example
-  ; (remove-documents [{:id "1"} {:id "2"} {:id "3"}] ["1" "3"])
-  ; =>
-  ; [{:id "2"}]
-  ;
-  ; @return (maps in vector)
-  [collection document-ids]
-  (letfn [(f0 [result document]
-              (if (vector/contains-item? document-ids (map/get-ns document :id))
-                  (->   result)
-                  (conj result document)))]
-         (reduce f0 [] collection)))
+;; ----------------------------------------------------------------------------
+;; ----------------------------------------------------------------------------
 
 (defn apply-on-document
   ; @ignore
+  ;
+  ; @description
+  ; Updates a document (identified by its document ID) in the given collection.
   ;
   ; @param (maps in vector) collection
   ; @param (string) document-id
@@ -361,20 +271,6 @@
   [collection document-id f & [params]]
   (let [document         (get-document collection document-id)
         params           (cons document params)
-        updated-document (apply f params)
-        updated-document (time/unparse-timestamps updated-document)]
+        updated-document (apply f params)]
        (-> collection (remove-document document-id)
                       (add-document    updated-document))))
-
-(defn document-exists?
-  ; @ignore
-  ;
-  ; @param (maps in vector) collection
-  ; @param (string) document-id
-  ;
-  ; @usage
-  ; (document-exists? [{...} {...}] "my-document")
-  ;
-  ; @return (boolean)
-  [collection document-id]
-  (boolean (get-document collection document-id)))

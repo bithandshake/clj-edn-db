@@ -1,30 +1,22 @@
 
 (ns edn-db.utils
-    (:require [edn-db.config     :as config]
-              [fruits.string.api :as string]))
+    (:require [edn-db.config :as config]))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
-
-(defn collection-name-valid?
-  ; @ignore
-  ;
-  ; @param (*) collection-name
-  ;
-  ; @usage
-  ; (collection-name-valid? "my_collection")
-  ;
-  ; @return (boolean)
-  [collection-name]
-  (string/not-empty? collection-name))
 
 (defn collection-name->filepath
   ; @ignore
   ;
+  ; @description
+  ; Converts the given collection name into collection filepath.
+  ;
   ; @param (string) collection-name
   ;
   ; @usage
-  ; (collection-name->filepath "my_collection")
+  ; (collection-name->filepath "my-collection")
+  ; =>
+  ; "environment/edn-db/my-collection.edn"
   ;
   ; @return (string)
   [collection-name]
