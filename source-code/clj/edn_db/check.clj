@@ -7,17 +7,17 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
-(defn max-filesize-reached?
+(defn max-filesize-exceeded?
   ; @ignore
   ;
   ; @param (string) collection-name
   ;
   ; @usage
-  ; (max-filesize-reached? "my_collection")
+  ; (max-filesize-exceeded? "my_collection")
   ;
   ; @return (boolean)
   [collection-name]
-  (-> collection-name utils/collection-name->filepath (io/max-filesize-reached? config/MAX-FILESIZE)))
+  (-> collection-name utils/collection-name->filepath (io/max-filesize-exceeded? config/MAX-FILESIZE)))
 
 (defn collection-exists?
   ; @ignore
@@ -41,7 +41,7 @@
   ;
   ; @return (boolean)
   [collection-name]
-  (-> collection-name max-filesize-reached? not))
+  (-> collection-name max-filesize-exceeded? not))
 
 (defn collection-readable?
   ; @ignore
