@@ -29,6 +29,38 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
+(defn document->document-id
+  ; @ignore
+  ;
+  ; @description
+  ; Returns the ID of the given document.
+  ;
+  ; @param (map) document
+  ;
+  ; @example
+  ; (document->document-id {:id "my-document" ...})
+  ; =>
+  ; "my-document"
+  ;
+  ; @example
+  ; (document->document-id {...})
+  ; =>
+  ; "my-document"
+  ;
+  ; @example
+  ; (document->document-id {:my-key "My value" ...})
+  ; =>
+  ; nil
+  ;
+  ; @example
+  ; (document->document-id {...})
+  ; =>
+  ; nil
+  ;
+  ; @return (map)
+  [document]
+  (map/get-ns document :id))
+
 (defn document<-document-id
   ; @ignore
   ;
@@ -67,15 +99,9 @@
   ;
   ; @return (map)
   [document]
-  (if (map/namespaced? document)
-      (let [namespace (map/namespace document)]
-           (if (get   document (keyword/add-namespace :id namespace))
-               (->    document)
-               (assoc document (keyword/add-namespace :id namespace)
-                               (random/generate-string))))
-      (if (get   document :id)
-          (->    document)
-          (assoc document :id (random/generate-string)))))
+  (if-let [document-id (document->document-id document)]
+          (-> document)
+          (-> document (map/assoc-ns :id (random/generate-string)))))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -119,6 +145,25 @@
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
 
+(defn get-document-dex
+  ; @ignore
+  ;
+  ; @description
+  ; Returns the index of a specific document (identified by its document ID) in the given collection.
+  ;
+  ; @param (maps in vector) collection
+  ; @param (string) document-id
+  ;
+  ; @usage
+  ; (get-document [{:id "my-document" ...} {...} {...}] "my-document")
+  ; =>
+  ; 0
+  ;
+  ; @return (integer)
+  [collection document-id]
+  (letfn [(f0 [%] (-> % document->document-id (= document-id)))]
+         (vector/first-dex-by collection f0)))
+
 (defn get-documents
   ; @ignore
   ;
@@ -135,13 +180,8 @@
   ;
   ; @return (maps in vector)
   [collection document-ids]
-  (letfn [(f0 [result document]
-              (if-not (vector/contains-item? document-ids (:id document))
-                      ; If result is NOT matches ...
-                      (-> result)
-                      ; If document is matches ...
-                      (conj result document)))]
-         (reduce f0 [] collection)))
+  (letfn [(f0 [%] (let [document-id (document->document-id %)] (vector/contains-item? document-ids document-id)))]
+         (vector/all-matches collection f0)))
 
 (defn get-document
   ; @ignore
@@ -159,10 +199,8 @@
   ;
   ; @return (map)
   [collection document-id]
-  (if-let [namespace (collection->namespace collection)]
-          (get-document-kv collection (keyword/add-namespace :id namespace)
-                           document-id)
-          (get-document-kv collection :id document-id)))
+  (letfn [(f0 [%] (-> % document->document-id (= document-id)))]
+         (vector/first-match collection f0)))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -183,7 +221,8 @@
   ;
   ; @return (boolean)
   [collection document-id]
-  (boolean (get-document collection document-id)))
+  (let [document (get-document collection document-id)]
+       (boolean document)))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -242,8 +281,13 @@
   ;
   ; @return (maps in vector)
   [collection document-id]
-  (letfn [(f0 [%] (= document-id (map/get-ns % :id)))]
-         (vector/remove-items collection f0)))
+  (println collection)
+  (letfn [(f0 [%] (println % (-> % document->document-id)
+                             (-> % document->document-id (= document-id)))
+                  (-> % document->document-id (= document-id)))]
+
+        (println (vector/remove-items-by collection f0))
+        (vector/remove-items-by collection f0)))
 
 ;; ----------------------------------------------------------------------------
 ;; ----------------------------------------------------------------------------
@@ -257,20 +301,15 @@
   ; @param (maps in vector) collection
   ; @param (string) document-id
   ; @param (function) f
-  ; @param (list of *)(opt) params
+  ; @param (vector) params
   ;
   ; @usage
   ; (apply-on-document [{:id "my-document" :label "My document"}]
-  ;                    "my-document" assoc :foo "bar")
-  ;
-  ; @usage
-  ; (apply-on-document [{:id "my-document" :label "My document"}]
-  ;                    "my-document" (fn [document] (assoc document :foo "bar")))
+  ;                    "my-document" assoc [:foo "bar"])
   ;
   ; @return (maps in vector)
-  [collection document-id f & [params]]
-  (let [document         (get-document collection document-id)
-        params           (cons document params)
-        updated-document (apply f params)]
-       (-> collection (remove-document document-id)
-                      (add-document    updated-document))))
+  [collection document-id f params]
+  (letfn [(f0 [%] (apply f % params))]
+         (if-let [document-dex (get-document-dex collection document-id)]
+                 (-> collection (vector/update-nth-item document-dex f0))
+                 (-> collection))))

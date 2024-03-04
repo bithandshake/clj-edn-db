@@ -22,7 +22,7 @@
   ;
   ; @return (boolean)
   ([collection-name]
-   (max-filesize-exceeded? collection-name options))
+   (max-filesize-exceeded? collection-name {}))
 
   ([collection-name {:keys [warn?]}]
    (if-not warn? (-> collection-name utils/collection-name->filepath (io/max-filesize-exceeded? config/MAX-FILESIZE))
@@ -47,7 +47,7 @@
   ;
   ; @return (boolean)
   ([collection-name]
-   (collection-exists? collection-name options))
+   (collection-exists? collection-name {}))
 
   ([collection-name {:keys [warn?]}]
    (if-not warn? (-> collection-name utils/collection-name->filepath io/file-exists?)
@@ -72,7 +72,7 @@
   ;
   ; @return (boolean)
   ([collection-name]
-   (collection-writable? collection-name options))
+   (collection-writable? collection-name {}))
 
   ([collection-name options]
    (-> collection-name (max-filesize-exceeded? options) not)))
@@ -92,7 +92,7 @@
   ;
   ; @return (boolean)
   ([collection-name]
-   (collection-readable? collection-name options))
+   (collection-readable? collection-name {}))
 
   ([collection-name options]
    (-> collection-name (collection-exists? options))))

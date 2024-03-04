@@ -10,7 +10,7 @@
 
 (defn get-collection
   ; @description
-  ; Returns the documents of a specific collection.
+  ; Returns the documents of a specific collection file.
   ;
   ; @param (string) collection-name
   ;
@@ -21,7 +21,7 @@
   ;
   ; @return (maps in vector)
   [collection-name]
-  (if (check/collection-exists? collection-name {:warn? true})
+  (if (check/collection-exists? collection-name {:warn? false})
       (-> collection-name utils/collection-name->filepath io/read-edn-file)))
 
 ;; ----------------------------------------------------------------------------
@@ -29,7 +29,7 @@
 
 (defn filter-documents
   ; @description
-  ; Returns the documents of a specific collection, filtered with the given 'filter-f' function.
+  ; Returns the documents of a specific collection file, filtered with the given 'filter-f' function.
   ;
   ; @param (string) collection-name
   ; @param (function) filter-f
@@ -46,7 +46,7 @@
 
 (defn filter-document
   ; @description
-  ; Returns the first document of a specific collection that matches the given 'filter-f' function.
+  ; Returns the first document of a specific collection file that matches the given 'filter-f' function.
   ;
   ; @param (string) collection-name
   ; @param (function) filter-f
@@ -66,7 +66,7 @@
 
 (defn get-documents
   ; @description
-  ; Returns specific documents (identified by their document ID) from a specific collection.
+  ; Returns specific documents (identified by their document ID) from a specific collection file.
   ;
   ; @param (string) collection-name
   ; @param (strings in vector) document-ids
@@ -83,7 +83,7 @@
 
 (defn get-document
   ; @description
-  ; Returns a specific document (identified by its document ID) from a specific collection.
+  ; Returns a specific document (identified by its document ID) from a specific collection file.
   ;
   ; @param (string) collection-name
   ; @param (string) document-id

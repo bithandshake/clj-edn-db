@@ -32,7 +32,7 @@
 
 (defn insert-document!
   ; @description
-  ; Inserts the given document to the end of a specific collection.
+  ; Inserts the given document to the end of a specific collection file.
   ;
   ; @param (string) collection-name
   ; @param (map) document
@@ -56,7 +56,7 @@
 
 (defn remove-document!
   ; @description
-  ; Removes a document (identified by its document ID) from a specific collection.
+  ; Removes a document (identified by its document ID) from a specific collection file.
   ;
   ; @param (string) collection-name
   ; @param (string) document-id
@@ -77,7 +77,7 @@
 
 (defn apply-on-document!
   ; @description
-  ; Updates a document (identified by its document ID) in a specific collection.
+  ; Updates a document (identified by its document ID) in a specific collection file.
   ;
   ; @param (string) collection-name
   ; @param (string) document-id
