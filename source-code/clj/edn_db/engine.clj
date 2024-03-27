@@ -128,7 +128,7 @@
   ; @ignore
   ;
   ; @description
-  ; Returns the first document of the given collection that matches the the given 'filter-f' function.
+  ; Returns the first document of the given collection that matches the given 'filter-f' function.
   ;
   ; @param (maps in vector) collection
   ; @param (function) filter-f
